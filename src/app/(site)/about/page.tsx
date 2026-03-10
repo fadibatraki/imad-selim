@@ -7,7 +7,6 @@ export const metadata: Metadata = {
     "About Us | Play SaaS Starter Kit and Boilerplate for Next.js",
   description: "This is About page description",
 };
-
 const AboutPage = () => {
   return (
     <main>
