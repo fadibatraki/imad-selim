@@ -4,17 +4,17 @@ Play Next.js is a free and **Open-source SaaS starter kit and boilerplate, desig
 
 ## Free SaaS Boilerplate and Starter Kit for Next.js 🚀
 
-Play Next.js SaaS Boilerplate and Starter Kit is a free, open-source solution ideal for startups, SaaS companies, and more. It offers essential UI components, authentication and database integration, and Stripe integration. Its superior design and functionality make it a go-to choice for launching a feature-rich SaaS website efficiently.
+Play Next.js SaaS Boilerplate and Starter Kit is a free, open-source solution ideal for startups, SaaS companies, and more. It offers essential UI components and Stripe integration. Its superior design and functionality make it a go-to choice for launching a feature-rich SaaS website efficiently.
 
 ### [🚀 View Live Demo](https://play.nextjstemplates.com/)
 
 ### [🔌 Documentation](https://nextjstemplates.com/docs)
 
-### All Essential Integrations - DB, Auth, Payment, MDX, and more ⚡
+### All Essential Integrations - Auth, Payment, MDX, and more ⚡
 
 Play Next.js SaaS Starter kit includes all the key integrations required to build a fully functional SaaS platform.
 
-- **PostgreSQL for Database**: Comes with PostgreSQL integration with Prisma which is a powerful and open-source relational database system ensures data integrity and reliability.
+// Database integration removed for frontend-only mode
 
 - **NextAuth for Authentication**: Play Next.js utilizes NextAuth, a versatile solution that provides secure login and user management.
 
