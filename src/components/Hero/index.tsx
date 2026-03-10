@@ -2,6 +2,7 @@
 
 import React, { useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Play, Youtube } from "lucide-react";
 
@@ -279,16 +280,16 @@ export default function Hero() {
           <div className="h-full w-full bg-[radial-gradient(closest-side,rgba(168,85,247,0.28),transparent_76%)]" />
         </div>
 
-        <div className="relative h-[290px] w-[230px] sm:h-[340px] sm:w-[290px] md:h-[410px] md:w-[360px] lg:h-[470px] lg:w-[420px]">
-          {/* <Image
+        {/* <div className="relative h-[290px] w-[230px] sm:h-[340px] sm:w-[290px] md:h-[410px] md:w-[360px] lg:h-[470px] lg:w-[420px]">
+           <Image
             src="/images/hero/imadselim1.png"
             alt="Imad Selim performing"
             fill
             priority
             className="object-cover object-top"
 
-          /> */}
-        </div>
+          /> 
+        </div> */}
 
 
         {/* Text */}
@@ -327,15 +328,23 @@ export default function Hero() {
           transition={{ delay: 0.35, duration: 0.7 }}
           className="mt-9 flex flex-col gap-4 sm:flex-row"
         >
-          <GlowButton primary>
-            <Play className="mr-2 h-5 w-5" />
-            Listen Now
-          </GlowButton>
+          <Link href="/music">
+            <GlowButton primary>
+              <Play className="mr-2 h-5 w-5" />
+              Listen Now
+            </GlowButton>
+          </Link>
 
-          <GlowButton youtube>
-            <Youtube className="mr-2 h-5 w-5 fill-white" />
-            Watch on YouTube
-          </GlowButton>
+          <a
+            href="https://www.youtube.com/@imad_selim"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GlowButton youtube>
+              <Youtube className="mr-2 h-5 w-5 fill-white" />
+              Watch on YouTube
+            </GlowButton>
+          </a>
         </motion.div>
       </div>
 

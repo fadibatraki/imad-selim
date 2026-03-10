@@ -22,43 +22,43 @@ export interface Poster {
 export const photos: Photo[] = [
   {
     id: 1,
-    src: "/images/media/photos/concert-1.jpg",
+    src: "/images/profile/1.jpeg",
     alt: "Live performance at Heritage Festival",
     category: "Concerts"
   },
   {
     id: 2,
-    src: "/images/media/photos/portrait-1.jpg",
+    src: "/images/profile/2.jpeg",
     alt: "Portrait session with traditional tembur",
     category: "Portraits"
   },
   {
     id: 3,
-    src: "/images/media/photos/concert-2.jpg",
+    src: "/images/profile/3.jpeg",
     alt: "Newroz celebration performance",
     category: "Concerts"
   },
   {
     id: 4,
-    src: "/images/media/photos/studio-1.jpg",
+    src: "/images/profile/4.jpeg",
     alt: "Recording session in studio",
     category: "Studio"
   },
   {
     id: 5,
-    src: "/images/media/photos/concert-3.jpg",
+    src: "/images/profile/5.jpeg",
     alt: "Stockholm World Music Series",
     category: "Concerts"
   },
   {
     id: 6,
-    src: "/images/media/photos/portrait-2.jpg",
+    src: "/images/profile/6.jpeg",
     alt: "Backstage moments",
     category: "Portraits"
   },
   {
     id: 7,
-    src: "/images/media/photos/concert-4.jpg",
+    src: "/images/profile/7.jpeg",
     alt: "Berlin cultural exchange night",
     category: "Concerts"
   },

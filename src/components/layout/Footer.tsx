@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import {
   Phone,
   Mail,
@@ -109,7 +110,7 @@ const Footer = () => {
 
       {/* ROW 2: Main Content - 3 Columns */}
       <div className="container relative z-10 mx-auto px-4 py-12">
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-8 lg:grid-cols-3 items-stretch">
 
           {/* COLUMN A: Stage Moments - Auto-scrolling photos */}
           <motion.div
@@ -117,14 +118,13 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-1"
+            className="lg:col-span-1 flex"
           >
-            <div className="relative overflow-hidden rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-6 backdrop-blur-xl">
-              <h3 className="mb-4 text-lg font-bold">
-                <span className="bg-gradient-to-r from-[#7C3AED] to-[#A855F7] bg-clip-text text-transparent">
-                  Stage Moments
-                </span>
-              </h3>
+            <div className="relative flex flex-col h-full overflow-hidden rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-6 backdrop-blur-xl">    <h3 className="mb-4 text-lg font-bold">
+              <span className="bg-gradient-to-r from-[#7C3AED] to-[#A855F7] bg-clip-text text-transparent">
+                Stage Moments
+              </span>
+            </h3>
 
               {/* Horizontal Scroll Gallery */}
               <div className="relative group/gallery">
@@ -159,14 +159,12 @@ const Footer = () => {
                       href="/media"
                       className="group relative h-32 w-44 flex-shrink-0 snap-start overflow-hidden rounded-lg border border-[#A855F7]/30 transition-all hover:border-[#F43F5E] hover:shadow-[0_0_20px_rgba(244,63,94,0.3)]"
                     >
-                      <div
-                        className="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                        style={{
-                          backgroundImage: `url(${photo.src})`,
-                          backgroundColor: '#0B0B12'
-                        }}
-                      />
-                      {/* Gradient overlay */}
+                      <Image
+                        src={photo.src}
+                        alt={photo.category}
+                        fill
+                        className="object-cover object-[center_20%] transition-transform duration-500 group-hover:scale-110" />
+
                       <div className="absolute inset-0 bg-gradient-to-t from-[#07070B]/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     </Link>
                   ))}
@@ -175,7 +173,7 @@ const Footer = () => {
 
               <Link
                 href="/media"
-                className="mt-4 inline-flex items-center gap-2 text-sm text-[#A855F7] transition-colors hover:text-[#F43F5E]"
+                className="mt-auto pt-4 inline-flex  items-center gap-2 text-sm text-[#A855F7] transition-colors hover:text-[#F43F5E]"
               >
                 <span>View Gallery</span>
                 <ArrowRight className="h-4 w-4" />
@@ -227,35 +225,38 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* COLUMN B: Latest Videos */}
+          {/* COLUMN B: Latest Videos - Imad Selim */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="lg:col-span-1"
+            className="lg:col-span-1 flex"
           >
-            <div className="relative overflow-hidden rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-6 backdrop-blur-xl">
-              <h3 className="mb-4 text-lg font-bold">
+            <div className="relative flex flex-col h-full overflow-hidden rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-6 backdrop-blur-xl">
+
+              <h3 className="mb-2 text-lg font-bold">
                 <span className="bg-gradient-to-r from-[#7C3AED] to-[#A855F7] bg-clip-text text-transparent">
                   Latest Videos
                 </span>
               </h3>
 
-              <div className="space-y-4">
+              <div className="space-y-2 flex-1">
+
                 {/* Featured Video */}
                 <a
-                  href={featuredVideo.youtubeUrl}
+                  href="https://www.youtube.com/watch?v=EXxIXEIj2Lg"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative block overflow-hidden rounded-xl border border-[#A855F7]/30 transition-all hover:border-[#F43F5E] hover:shadow-[0_0_25px_rgba(244,63,94,0.3)]"
                 >
                   <div className="relative aspect-video w-full overflow-hidden bg-[#0B0B12]">
                     <img
-                      src={getYouTubeThumbnail(featuredVideo.youtubeUrl) || '/images/placeholder-video.jpg'}
-                      alt={featuredVideo.title}
+                      src="https://img.youtube.com/vi/EXxIXEIj2Lg/maxresdefault.jpg"
+                      alt="Imad Selim Music"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
+
                     {/* Play overlay */}
                     <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-[#07070B]/80 via-[#07070B]/40 to-transparent">
                       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#7C3AED] to-[#F43F5E] shadow-lg transition-transform group-hover:scale-110">
@@ -263,55 +264,94 @@ const Footer = () => {
                       </div>
                     </div>
                   </div>
+
                   <div className="p-3">
                     <p className="mb-1 line-clamp-2 text-sm font-semibold text-white group-hover:text-[#F43F5E]">
-                      {featuredVideo.title}
+                      Imad Selim – Official Music Video
                     </p>
                     <p className="text-xs text-white/50">
-                      {formatVideoDate(featuredVideo.dateISO)}
+                      YouTube
                     </p>
                   </div>
                 </a>
 
-                {/* Secondary Video */}
+
+                {/* Video 2 */}
                 <a
-                  href={secondaryVideo.youtubeUrl}
+                  href="https://www.youtube.com/watch?v=Oueo68_lxjI"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex gap-3 overflow-hidden rounded-xl border border-[#A855F7]/20 p-2 transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/5"
                 >
                   <div className="relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-lg bg-[#0B0B12]">
                     <img
-                      src={getYouTubeThumbnail(secondaryVideo.youtubeUrl) || '/images/placeholder-video.jpg'}
-                      alt={secondaryVideo.title}
+                      src="https://img.youtube.com/vi/Oueo68_lxjI/mqdefault.jpg"
+                      alt="Imad Selim Video"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
+
                     <div className="absolute inset-0 flex items-center justify-center bg-[#07070B]/40">
                       <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#7C3AED] to-[#F43F5E]">
                         <Play className="h-4 w-4 fill-white text-white" />
                       </div>
                     </div>
                   </div>
+
                   <div className="flex-1 py-1">
                     <p className="mb-1 line-clamp-2 text-xs font-semibold text-white group-hover:text-[#F43F5E]">
-                      {secondaryVideo.title}
+                      Imad Selim – Music Video
                     </p>
                     <p className="text-xs text-white/50">
-                      {formatVideoDate(secondaryVideo.dateISO)}
+                      YouTube
                     </p>
                   </div>
                 </a>
+
+
+                {/* Video 3 */}
+                <a
+                  href="https://www.youtube.com/watch?v=CIJ7ekVD6xY"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex gap-3 overflow-hidden rounded-xl border border-[#A855F7]/20 p-2 transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/5"
+                >
+                  <div className="relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-lg bg-[#0B0B12]">
+                    <img
+                      src="https://img.youtube.com/vi/CIJ7ekVD6xY/mqdefault.jpg"
+                      alt="Imad Selim Music"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+
+                    <div className="absolute inset-0 flex items-center justify-center bg-[#07070B]/40">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#7C3AED] to-[#F43F5E]">
+                        <Play className="h-4 w-4 fill-white text-white" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex-1 py-1">
+                    <p className="mb-1 line-clamp-2 text-xs font-semibold text-white group-hover:text-[#F43F5E]">
+                      Imad Selim – Music Release
+                    </p>
+                    <p className="text-xs text-white/50">
+                      YouTube
+                    </p>
+                  </div>
+                </a>
+
               </div>
 
+              {/* YouTube Channel */}
               <a
-                href="https://youtube.com/@imadselim"
+                href="https://www.youtube.com/@imad_selim"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 text-sm text-[#A855F7] transition-colors hover:text-[#F43F5E]"
+                className="mt-auto pt-4 inline-flex  items-center gap-2 text-sm text-[#A855F7] transition-colors hover:text-[#F43F5E]"
               >
                 <span>More on YouTube</span>
                 <ArrowRight className="h-4 w-4" />
               </a>
+
             </div>
           </motion.div>
 
@@ -321,9 +361,9 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-1"
+            className="lg:col-span-1 flex"
           >
-            <div className="relative overflow-hidden rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-6 backdrop-blur-xl">
+            <div className="relative flex flex-col h-full overflow-hidden rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-6 backdrop-blur-xl">
               <h3 className="mb-4 text-lg font-bold">
                 <span className="bg-gradient-to-r from-[#7C3AED] to-[#A855F7] bg-clip-text text-transparent">
                   Contact & Social
@@ -382,7 +422,7 @@ const Footer = () => {
 
               {/* Social Icons */}
               <div>
-                <p className="mb-3 text-xs font-bold uppercase tracking-wider text-white/50">
+                <p className="mb-6 text-s font-bold uppercase tracking-wider text-white/50">
                   Follow
                 </p>
                 <div className="flex flex-wrap gap-3">

@@ -43,24 +43,6 @@ const menuData: Menu[] = [
     path: "/music",
     newTab: false,
   },
-  {
-    id: 11,
-    title: "Pages",
-    newTab: false,
-    submenu: [
-      {
-        id: 61,
-        title: "About Page",
-        path: "/about",
-        newTab: false,
-      },
-      {
-        id: 68,
-        title: "Error Page",
-        path: "/error",
-        newTab: false,
-      },
-    ],
-  },
+
 ];
 export default menuData;

@@ -10,7 +10,7 @@ import { useRef, useEffect } from "react";
 
 const About = () => {
   // Create looped arrays (triple the content for infinite scroll)
-  const loopedPhotos = [...photos.slice(0, 8), ...photos.slice(0, 8), ...photos.slice(0, 8)];
+  const loopedPhotos = [...photos.slice(0, 7), ...photos.slice(0, 7), ...photos.slice(0, 7)];
   const featuredStories = stories.slice(0, 5);
   const loopedStories = [...featuredStories, ...featuredStories, ...featuredStories];
 
@@ -195,7 +195,7 @@ const About = () => {
                             src={photo.src}
                             alt={photo.alt}
                             fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
                           />
 
                           {/* Gradient overlay */}
@@ -435,7 +435,7 @@ const About = () => {
                 className="flex flex-wrap gap-4"
               >
                 <motion.a
-                  href="https://youtube.com/@imadselim"
+                  href="https://www.youtube.com/@imad_selim"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-[#7C3AED] px-8 py-4 font-semibold text-white transition-all duration-300"

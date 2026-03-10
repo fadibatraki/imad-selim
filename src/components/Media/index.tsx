@@ -3,7 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Image as ImageIcon, ArrowRight, Calendar } from "lucide-react";
 import { photos, videos } from "@/data/media";
-
+import Image from "next/image";
 const Media = () => {
   const featuredPhotos = photos.slice(0, 4);
   const featuredVideo = videos[0];
@@ -82,20 +82,16 @@ const Media = () => {
                   </div>
 
                   {/* Photo Placeholder */}
-                  <div className="relative h-full w-full bg-gradient-to-br from-[#7C3AED]/20 to-[#F43F5E]/10">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div
-                        className="h-24 w-24 rounded-full bg-[#7C3AED]/30 blur-3xl"
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          opacity: [0.3, 0.5, 0.3],
-                        }}
-                        transition={{ duration: 4, repeat: Infinity }}
-                      />
-                      <div className="absolute">
-                        <ImageIcon className="h-12 w-12 text-white/20" />
-                      </div>
-                    </div>
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={photo.src}
+                      alt={photo.category}
+                      fill
+                  className="object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-105"
+                    />
+
+                    {/* Dark overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/40 via-transparent to-transparent" />
 
                     {/* Category Badge */}
                     <div className="absolute left-3 top-3 rounded-full border border-[#7C3AED]/30 bg-[#0B0B12]/90 px-2.5 py-1 text-xs font-medium text-white/80 backdrop-blur-xl">
@@ -125,7 +121,7 @@ const Media = () => {
             ))}
           </div>
 
-          {/* Right Column: 1 Featured Video */}
+          {/* Right Column: Featured Video - Imad Selim */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -134,6 +130,7 @@ const Media = () => {
             className="group relative"
           >
             <div className="h-full overflow-hidden rounded-2xl border border-[#A855F7]/30 bg-gradient-to-b from-[#0B0B12]/90 to-[#0B0B12]/95 backdrop-blur-xl transition-all duration-300 hover:border-[#A855F7]/50 hover:shadow-[0_0_30px_rgba(124,58,237,0.3)]">
+
               {/* Featured Badge */}
               <div className="absolute left-4 top-4 z-10 rounded-full border border-[#F59E0B]/50 bg-[#F59E0B]/20 px-3 py-1.5 text-xs font-bold text-[#F59E0B] backdrop-blur-xl">
                 FEATURED VIDEO
@@ -142,8 +139,8 @@ const Media = () => {
               {/* Video Embed */}
               <div className="relative aspect-video overflow-hidden bg-black">
                 <iframe
-                  src={featuredVideo.youtubeUrl}
-                  title={featuredVideo.title}
+                  src="https://www.youtube.com/embed/EXxIXEIj2Lg"
+                  title="Imad Selim Official Video"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="h-full w-full"
@@ -153,11 +150,12 @@ const Media = () => {
               {/* Video Info */}
               <div className="p-6">
                 <h3 className="mb-3 text-xl font-bold text-white transition-colors group-hover:text-[#A855F7]">
-                  {featuredVideo.title}
+                  Imad Selim - Official Music Video
                 </h3>
+
                 <div className="flex items-center gap-2 text-sm text-white/50">
                   <Calendar className="h-4 w-4 text-[#7C3AED]" />
-                  <span>{new Date(featuredVideo.dateISO).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
+                  <span>Latest Release</span>
                 </div>
               </div>
 

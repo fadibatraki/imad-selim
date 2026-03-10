@@ -46,49 +46,31 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
         </div>
 
         {/* Image container */}
-        <div className="relative aspect-[4/3] overflow-hidden bg-[#7C3AED]/10">
-          <div className="absolute inset-0 flex items-center justify-center">
-            {/* Placeholder gradient */}
-            <motion.div
-              className="h-32 w-32 rounded-full bg-[#7C3AED] opacity-25 blur-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.25, 0.35, 0.25],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            />
-            {/* Perfume bottle icon placeholder */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <svg
-                className="h-24 w-24 text-white/10"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1}
-                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                />
-              </svg>
-            </div>
-          </div>
+        {/* Image container */}
+<div className="relative aspect-[4/3] overflow-hidden bg-[#7C3AED]/10">
+  <Image
+    src={product.image}
+    alt={product.name}
+    fill
+    className="object-cover transition-transform duration-500 group-hover:scale-105"
+  />
 
-          {/* Scan line effect */}
-          <motion.div
-            className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#7C3AED]/60 to-transparent opacity-0 group-hover:opacity-100"
-            animate={{
-              top: ["0%", "100%"],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-        </div>
+  {/* Optional overlay */}
+  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/30 via-transparent to-transparent" />
 
+  {/* Scan line effect */}
+  <motion.div
+    className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#7C3AED]/60 to-transparent opacity-0 group-hover:opacity-100"
+    animate={{
+      top: ["0%", "100%"],
+    }}
+    transition={{
+      duration: 2,
+      repeat: Infinity,
+      ease: "linear",
+    }}
+  />
+</div>
         {/* Content */}
         <div className="relative p-6">
           {/* Product name */}
