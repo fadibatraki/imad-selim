@@ -29,14 +29,14 @@ const ProductsSection = () => {
         />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="container relative z-10 mx-auto px-4 sm:px-5 md:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mx-auto mb-12 max-w-3xl text-center md:mb-16"
+          className="mx-auto mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-3xl text-center"
         >
           <motion.div
             className="mb-4 flex justify-center"
@@ -48,19 +48,19 @@ const ProductsSection = () => {
             <Sparkles className="h-10 w-10 text-[#7C3AED]" />
           </motion.div>
 
-          <h2 className="mb-4 text-4xl font-extrabold text-white md:text-5xl lg:text-6xl">
+          <h2 className="mb-3 sm:mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white">
             <span className="bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#F43F5E] bg-clip-text text-transparent">
               Signature Perfumes
             </span>
           </h2>
 
-          <p className="text-lg text-white/60 md:text-xl">
+          <p className="text-base sm:text-lg md:text-xl text-white/60">
             Discover our exclusive collection of fragrances inspired by Kurdish heritage and artistry
           </p>
         </motion.div>
 
         {/* Products Grid */}
-        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mb-8 sm:mb-10 md:mb-12 grid grid-cols-1 gap-6 sm:gap-7 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}

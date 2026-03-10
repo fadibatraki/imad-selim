@@ -103,7 +103,7 @@ const Header = () => {
                     className={[
                       "relative font-extrabold tracking-tight",
                       "bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#F43F5E] bg-clip-text text-transparent",
-                      sticky || pathUrl !== "/" ? "text-2xl" : "text-3xl",
+                      sticky || pathUrl !== "/" ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl",
                     ].join(" ")}
                     animate={{
                       backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -124,7 +124,7 @@ const Header = () => {
                   >
                     <span className={[
                       "font-extrabold tracking-tight",
-                      sticky || pathUrl !== "/" ? "text-2xl" : "text-3xl",
+                      sticky || pathUrl !== "/" ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl",
                     ].join(" ")}>
                       IMAD SELIM
                     </span>
@@ -241,7 +241,7 @@ const Header = () => {
                   </ul>
                 </nav>
               </div>
-              
+
             </div>
           </div>
         </div>

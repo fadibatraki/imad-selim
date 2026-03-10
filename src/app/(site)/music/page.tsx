@@ -33,7 +33,7 @@ const MusicPage = () => {
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="container relative z-10 mx-auto px-4 sm:px-5 md:px-6">
         {/* Page Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -151,8 +151,8 @@ const MusicPage = () => {
             <button
               onClick={() => setActiveTab("singles")}
               className={`flex items-center gap-2 rounded-xl px-8 py-3 font-semibold transition-all ${activeTab === "singles"
-                  ? "bg-[#7C3AED] text-white shadow-[0_0_20px_rgba(124,58,237,0.5)]"
-                  : "text-white/60 hover:text-white"
+                ? "bg-[#7C3AED] text-white shadow-[0_0_20px_rgba(124,58,237,0.5)]"
+                : "text-white/60 hover:text-white"
                 }`}
             >
               <Music className="h-5 w-5" />
@@ -161,8 +161,8 @@ const MusicPage = () => {
             <button
               onClick={() => setActiveTab("albums")}
               className={`flex items-center gap-2 rounded-xl px-8 py-3 font-semibold transition-all ${activeTab === "albums"
-                  ? "bg-[#7C3AED] text-white shadow-[0_0_20px_rgba(124,58,237,0.5)]"
-                  : "text-white/60 hover:text-white"
+                ? "bg-[#7C3AED] text-white shadow-[0_0_20px_rgba(124,58,237,0.5)]"
+                : "text-white/60 hover:text-white"
                 }`}
             >
               <Disc3 className="h-5 w-5" />

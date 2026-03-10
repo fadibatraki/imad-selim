@@ -43,7 +43,7 @@ export default function MediaPage() {
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="container mx-auto px-4 pt-[120px] pb-20 md:pt-[150px]">
+        <div className="container mx-auto px-4 sm:px-5 md:px-6 pt-[100px] sm:pt-[110px] md:pt-[120px] pb-16 sm:pb-18 md:pb-20">
           {/* Page Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -88,8 +88,8 @@ export default function MediaPage() {
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`relative flex items-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all ${isActive
-                        ? "bg-[#7C3AED] text-white shadow-[0_0_20px_rgba(124,58,237,0.4)]"
-                        : "text-white/60 hover:text-white"
+                      ? "bg-[#7C3AED] text-white shadow-[0_0_20px_rgba(124,58,237,0.4)]"
+                      : "text-white/60 hover:text-white"
                       }`}
                   >
                     <Icon className="h-5 w-5" />

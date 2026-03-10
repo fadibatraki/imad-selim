@@ -266,7 +266,7 @@ export default function Hero() {
       </div>
 
       {/* ===================== Content ===================== */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-5 py-16">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-4 sm:px-5 md:px-6 py-12 sm:py-16">
         {/* Artist image: make it feel alive + no rectangle */}
 
         {/* Strong rim glow */}
@@ -298,8 +298,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.7 }}
           className="text-center"
-        >
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+        >          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
             <span className="relative">
               <span className="absolute inset-0 text-white/10 blur-[2px]">
                 IMAD SELIM
@@ -312,11 +311,11 @@ export default function Hero() {
 
           <Waveform />
 
-          <p className="mt-3 text-xs font-medium tracking-[0.32em] text-white/70 sm:text-sm md:text-base">
+          <p className="mt-3 text-xs font-medium tracking-[0.20em] sm:tracking-[0.28em] md:tracking-[0.32em] text-white/70 sm:text-sm md:text-base">
             Singer • Poet • Traditional Storyteller
           </p>
 
-          <p className="mx-auto mt-4 max-w-xl text-sm text-white/65 sm:text-base">
+          <p className="mx-auto mt-3 sm:mt-4 max-w-xl px-4 text-sm text-white/65 sm:text-base">
             A Kurdish artist bringing heritage to life through voice and story.
           </p>
         </motion.div>

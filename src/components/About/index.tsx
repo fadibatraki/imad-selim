@@ -132,8 +132,8 @@ const About = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-5">
-        <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-5 md:px-6">
+        <div className="flex flex-col gap-8 sm:gap-10 lg:gap-16 lg:flex-row">
           {/* LEFT COLUMN - Media Stack */}
           <div className="w-full lg:w-5/12">
             {/* Stage Moments - Horizontal Image Slider */}
@@ -144,7 +144,7 @@ const About = () => {
               transition={{ duration: 0.8 }}
               className="mb-8"
             >
-              <h3 className="mb-4 text-lg font-bold text-white/80">Stage Moments</h3>
+              <h3 className="mb-3 sm:mb-4 text-base sm:text-lg font-bold text-white/80">Stage Moments</h3>
 
               {/* Horizontal scrolling container */}
               <div className="group/slider relative overflow-hidden rounded-xl border border-white/10 bg-[#0B0B12]/20 p-3 backdrop-blur-sm">
@@ -180,11 +180,11 @@ const About = () => {
                     WebkitOverflowScrolling: 'touch'
                   } as React.CSSProperties}
                 >
-                  <div className="flex gap-4 pb-2">
+                  <div className="flex gap-3 sm:gap-4 pb-2">
                     {loopedPhotos.map((photo, i) => (
                       <Link key={`photo-${i}`} href="/media">
                         <motion.div
-                          className="group relative h-56 w-72 flex-shrink-0 overflow-hidden rounded-lg border border-white/10"
+                          className="group relative h-44 w-56 sm:h-52 sm:w-64 md:h-56 md:w-72 flex-shrink-0 overflow-hidden rounded-lg border border-white/10"
                           initial={{ opacity: 0, x: -20 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
@@ -237,7 +237,7 @@ const About = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="relative"
             >
-              <h3 className="mb-4 text-lg font-bold text-white/80">From the Stories</h3>
+              <h3 className="mb-3 sm:mb-4 text-base sm:text-lg font-bold text-white/80">From the Stories</h3>
 
               {/* Stories container with vertical scroll */}
               <div className="group/stories relative overflow-hidden rounded-xl border border-white/10 bg-[#0B0B12]/20 backdrop-blur-sm">

@@ -63,7 +63,7 @@ const AlbumDetailPage = () => {
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="container relative z-10 mx-auto px-4 sm:px-5 md:px-6">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

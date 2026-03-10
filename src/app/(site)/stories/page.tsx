@@ -33,7 +33,7 @@ export default function StoriesPage() {
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="container mx-auto px-4 pt-[120px] pb-20 md:pt-[150px]">
+        <div className="container mx-auto px-4 sm:px-5 md:px-6 pt-[100px] sm:pt-[110px] md:pt-[120px] pb-16 sm:pb-18 md:pb-20">
           {/* Page Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

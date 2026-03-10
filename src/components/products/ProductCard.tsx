@@ -47,71 +47,71 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
 
         {/* Image container */}
         {/* Image container */}
-<div className="relative aspect-[4/3] overflow-hidden bg-[#7C3AED]/10">
-  <Image
-    src={product.image}
-    alt={product.name}
-    fill
-    className="object-cover transition-transform duration-500 group-hover:scale-105"
-  />
+        <div className="relative aspect-[4/3] overflow-hidden bg-[#7C3AED]/10">
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
 
-  {/* Optional overlay */}
-  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/30 via-transparent to-transparent" />
+          {/* Optional overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/30 via-transparent to-transparent" />
 
-  {/* Scan line effect */}
-  <motion.div
-    className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#7C3AED]/60 to-transparent opacity-0 group-hover:opacity-100"
-    animate={{
-      top: ["0%", "100%"],
-    }}
-    transition={{
-      duration: 2,
-      repeat: Infinity,
-      ease: "linear",
-    }}
-  />
-</div>
+          {/* Scan line effect */}
+          <motion.div
+            className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#7C3AED]/60 to-transparent opacity-0 group-hover:opacity-100"
+            animate={{
+              top: ["0%", "100%"],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        </div>
         {/* Content */}
-        <div className="relative p-6">
+        <div className="relative p-4 sm:p-5 md:p-6">
           {/* Product name */}
-          <h3 className="mb-2 text-xl font-bold text-white transition-colors group-hover:text-[#A855F7]">
+          <h3 className="mb-2 text-lg sm:text-xl font-bold text-white transition-colors group-hover:text-[#A855F7]">
             {product.name}
           </h3>
 
           {/* Description */}
-          <p className="mb-4 text-sm text-white/60">{product.shortDescription}</p>
+          <p className="mb-3 sm:mb-4 text-xs sm:text-sm text-white/60">{product.shortDescription}</p>
 
           {/* Notes */}
-          <div className="mb-4 flex flex-wrap gap-2">
+          <div className="mb-3 sm:mb-4 flex flex-wrap gap-1.5 sm:gap-2">
             {product.notes.slice(0, 3).map((note, i) => (
               <span
                 key={i}
-                className="rounded-full border border-[#7C3AED]/30 bg-[#7C3AED]/10 px-3 py-1 text-xs text-white/70"
+                className="rounded-full border border-[#7C3AED]/30 bg-[#7C3AED]/10 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs text-white/70"
               >
                 {note}
               </span>
             ))}
             {product.notes.length > 3 && (
-              <span className="rounded-full border border-[#7C3AED]/30 bg-[#7C3AED]/10 px-3 py-1 text-xs text-white/70">
+              <span className="rounded-full border border-[#7C3AED]/30 bg-[#7C3AED]/10 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs text-white/70">
                 +{product.notes.length - 3}
               </span>
             )}
           </div>
 
           {/* Price and CTA */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold text-[#F59E0B]">${product.price}</span>
-                <span className="text-sm text-white/50">{product.sizeMl}ml</span>
+                <span className="text-xl sm:text-2xl font-bold text-[#F59E0B]">${product.price}</span>
+                <span className="text-xs sm:text-sm text-white/50">{product.sizeMl}ml</span>
               </div>
             </div>
 
-            <Link href={`/products/${product.slug}`}>
+            <Link href={`/products/${product.slug}`} className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group/btn relative overflow-hidden rounded-lg border border-[#7C3AED]/50 bg-[#7C3AED]/20 px-5 py-2.5 font-semibold text-white transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/20 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)]"
+                className="group/btn w-full sm:w-auto relative overflow-hidden rounded-lg border border-[#7C3AED]/50 bg-[#7C3AED]/20 px-4 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/20 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)]"
               >
                 <span className="relative z-10">View Details</span>
                 {/* Button glow */}

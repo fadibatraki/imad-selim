@@ -89,7 +89,7 @@ const Footer = () => {
       </div>
 
       {/* ROW 1: Title + Tagline */}
-      <div className="container relative z-10 mx-auto px-4 pt-16 pb-8">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8 pt-8 sm:pt-12 md:pt-16 pb-4 sm:pb-6 md:pb-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -97,20 +97,20 @@ const Footer = () => {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h2 className="mb-3 text-4xl font-extrabold tracking-tight md:text-5xl">
+          <h2 className="mb-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
             <span className="bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#F43F5E] bg-clip-text text-transparent">
               Stay Connected
             </span>
           </h2>
-          <p className="text-base text-white/60 md:text-lg">
+          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/60">
             Your gateway to stage moments, music, and culture
           </p>
         </motion.div>
       </div>
 
       {/* ROW 2: Main Content - 3 Columns */}
-      <div className="container relative z-10 mx-auto px-4 py-12">
-        <div className="grid gap-8 lg:grid-cols-3 items-stretch">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 lg:py-12">
+        <div className="grid gap-4 sm:gap-5 md:gap-6 lg:gap-8 lg:grid-cols-3 items-stretch">
 
           {/* COLUMN A: Stage Moments - Auto-scrolling photos */}
           <motion.div
@@ -120,11 +120,12 @@ const Footer = () => {
             transition={{ duration: 0.8 }}
             className="lg:col-span-1 flex"
           >
-            <div className="relative flex flex-col h-full overflow-hidden rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-6 backdrop-blur-xl">    <h3 className="mb-4 text-lg font-bold">
-              <span className="bg-gradient-to-r from-[#7C3AED] to-[#A855F7] bg-clip-text text-transparent">
-                Stage Moments
-              </span>
-            </h3>
+            <div className="relative flex flex-col h-full overflow-hidden rounded-xl sm:rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-3 sm:p-4 md:p-5 lg:p-6 backdrop-blur-xl">
+              <h3 className="mb-2 sm:mb-3 text-sm sm:text-base md:text-lg font-bold">
+                <span className="bg-gradient-to-r from-[#7C3AED] to-[#A855F7] bg-clip-text text-transparent">
+                  Stage Moments
+                </span>
+              </h3>
 
               {/* Horizontal Scroll Gallery */}
               <div className="relative group/gallery">
@@ -151,13 +152,13 @@ const Footer = () => {
                 {/* Scrollable container */}
                 <div
                   ref={galleryRef}
-                  className="scroll-gallery flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2"
+                  className="scroll-gallery flex gap-2 sm:gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2"
                 >
                   {galleryPhotos.map((photo) => (
                     <Link
                       key={photo.id}
                       href="/media"
-                      className="group relative h-32 w-44 flex-shrink-0 snap-start overflow-hidden rounded-lg border border-[#A855F7]/30 transition-all hover:border-[#F43F5E] hover:shadow-[0_0_20px_rgba(244,63,94,0.3)]"
+                      className="group relative h-20 w-28 sm:h-24 sm:w-32 md:h-28 md:w-36 lg:h-32 lg:w-44 flex-shrink-0 snap-start overflow-hidden rounded-lg border border-[#A855F7]/30 transition-all hover:border-[#F43F5E] hover:shadow-[0_0_20px_rgba(244,63,94,0.3)]"
                     >
                       <Image
                         src={photo.src}
@@ -173,18 +174,18 @@ const Footer = () => {
 
               <Link
                 href="/media"
-                className="mt-auto pt-4 inline-flex  items-center gap-2 text-sm text-[#A855F7] transition-colors hover:text-[#F43F5E]"
+                className="mt-auto pt-2 sm:pt-3 inline-flex items-center gap-1.5 sm:gap-2 text-xs text-[#A855F7] transition-colors hover:text-[#F43F5E]"
               >
                 <span>View Gallery</span>
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Link>
 
               {/* Stories Block */}
-              <div className="relative mt-6 overflow-hidden rounded-xl border border-[#A855F7]/20 bg-[#0B0B12]/40 p-3">
+              <div className="relative mt-3 sm:mt-4 md:mt-5 lg:mt-6 overflow-hidden rounded-lg sm:rounded-xl border border-[#A855F7]/20 bg-[#0B0B12]/40 p-2 sm:p-2.5 md:p-3">
                 {/* Header - Sticky */}
-                <div className="sticky top-0 z-10 mb-2 flex items-center gap-2 bg-[#0B0B12]/40 pb-2 backdrop-blur-sm">
-                  <Quote className="h-3.5 w-3.5 text-[#A855F7]" />
-                  <h4 className="text-xs font-bold">
+                <div className="sticky top-0 z-10 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 bg-[#0B0B12]/40 pb-1.5 sm:pb-2 backdrop-blur-sm">
+                  <Quote className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-[#A855F7]" />
+                  <h4 className="text-[10px] sm:text-xs font-bold">
                     <span className="bg-gradient-to-r from-[#7C3AED] to-[#F43F5E] bg-clip-text text-transparent">
                       From the Stories
                     </span>
@@ -233,22 +234,22 @@ const Footer = () => {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="lg:col-span-1 flex"
           >
-            <div className="relative flex flex-col h-full overflow-hidden rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-6 backdrop-blur-xl">
+            <div className="relative flex flex-col h-full overflow-hidden rounded-xl sm:rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-3 sm:p-4 md:p-5 lg:p-6 backdrop-blur-xl">
 
-              <h3 className="mb-2 text-lg font-bold">
+              <h3 className="mb-2 sm:mb-2.5 md:mb-3 text-sm sm:text-base md:text-lg font-bold">
                 <span className="bg-gradient-to-r from-[#7C3AED] to-[#A855F7] bg-clip-text text-transparent">
                   Latest Videos
                 </span>
               </h3>
 
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 sm:space-y-2.5 md:space-y-3 flex-1">
 
-                {/* Featured Video */}
+                {/* Featured video */}
                 <a
                   href="https://www.youtube.com/watch?v=EXxIXEIj2Lg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative block overflow-hidden rounded-xl border border-[#A855F7]/30 transition-all hover:border-[#F43F5E] hover:shadow-[0_0_25px_rgba(244,63,94,0.3)]"
+                  className="group relative block overflow-hidden rounded-lg sm:rounded-xl border border-[#A855F7]/30 transition-all hover:border-[#F43F5E] hover:shadow-[0_0_25px_rgba(244,63,94,0.3)]"
                 >
                   <div className="relative aspect-video w-full overflow-hidden bg-[#0B0B12]">
                     <img
@@ -259,29 +260,29 @@ const Footer = () => {
 
                     {/* Play overlay */}
                     <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-[#07070B]/80 via-[#07070B]/40 to-transparent">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#7C3AED] to-[#F43F5E] shadow-lg transition-transform group-hover:scale-110">
-                        <Play className="h-8 w-8 fill-white text-white" />
+                      <div className="flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#7C3AED] to-[#F43F5E] shadow-lg transition-transform group-hover:scale-110">
+                        <Play className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 fill-white text-white" />
                       </div>
                     </div>
                   </div>
 
-                  <div className="p-3">
-                    <p className="mb-1 line-clamp-2 text-sm font-semibold text-white group-hover:text-[#F43F5E]">
+                  <div className="p-2 sm:p-2.5 md:p-3">
+                    <p className="mb-0.5 sm:mb-1 line-clamp-2 text-xs sm:text-sm font-semibold text-white group-hover:text-[#F43F5E]">
                       Imad Selim – Official Music Video
                     </p>
-                    <p className="text-xs text-white/50">
+                    <p className="text-[10px] sm:text-xs text-white/50">
                       YouTube
                     </p>
                   </div>
                 </a>
 
 
-                {/* Video 2 */}
+                {/* Secondary video */}
                 <a
                   href="https://www.youtube.com/watch?v=Oueo68_lxjI"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex gap-3 overflow-hidden rounded-xl border border-[#A855F7]/20 p-2 transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/5"
+                  className="group flex gap-2 sm:gap-2.5 md:gap-3 overflow-hidden rounded-lg sm:rounded-xl border border-[#A855F7]/20 p-1.5 sm:p-2 transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/5"
                 >
                   <div className="relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-lg bg-[#0B0B12]">
                     <img
@@ -291,29 +292,29 @@ const Footer = () => {
                     />
 
                     <div className="absolute inset-0 flex items-center justify-center bg-[#07070B]/40">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#7C3AED] to-[#F43F5E]">
-                        <Play className="h-4 w-4 fill-white text-white" />
+                      <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#7C3AED] to-[#F43F5E]">
+                        <Play className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-white text-white" />
                       </div>
                     </div>
                   </div>
 
                   <div className="flex-1 py-1">
-                    <p className="mb-1 line-clamp-2 text-xs font-semibold text-white group-hover:text-[#F43F5E]">
+                    <p className="mb-0.5 sm:mb-1 line-clamp-2 text-xs font-semibold text-white group-hover:text-[#F43F5E]">
                       Imad Selim – Music Video
                     </p>
-                    <p className="text-xs text-white/50">
+                    <p className="text-[10px] sm:text-xs text-white/50">
                       YouTube
                     </p>
                   </div>
                 </a>
 
 
-                {/* Video 3 */}
+                {/* Third video */}
                 <a
                   href="https://www.youtube.com/watch?v=CIJ7ekVD6xY"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex gap-3 overflow-hidden rounded-xl border border-[#A855F7]/20 p-2 transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/5"
+                  className="group flex gap-2 sm:gap-2.5 md:gap-3 overflow-hidden rounded-lg sm:rounded-xl border border-[#A855F7]/20 p-1.5 sm:p-2 transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/5"
                 >
                   <div className="relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-lg bg-[#0B0B12]">
                     <img
@@ -323,17 +324,17 @@ const Footer = () => {
                     />
 
                     <div className="absolute inset-0 flex items-center justify-center bg-[#07070B]/40">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#7C3AED] to-[#F43F5E]">
-                        <Play className="h-4 w-4 fill-white text-white" />
+                      <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#7C3AED] to-[#F43F5E]">
+                        <Play className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-white text-white" />
                       </div>
                     </div>
                   </div>
 
                   <div className="flex-1 py-1">
-                    <p className="mb-1 line-clamp-2 text-xs font-semibold text-white group-hover:text-[#F43F5E]">
+                    <p className="mb-0.5 sm:mb-1 line-clamp-2 text-xs font-semibold text-white group-hover:text-[#F43F5E]">
                       Imad Selim – Music Release
                     </p>
-                    <p className="text-xs text-white/50">
+                    <p className="text-[10px] sm:text-xs text-white/50">
                       YouTube
                     </p>
                   </div>
@@ -346,10 +347,10 @@ const Footer = () => {
                 href="https://www.youtube.com/@imad_selim"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-auto pt-4 inline-flex  items-center gap-2 text-sm text-[#A855F7] transition-colors hover:text-[#F43F5E]"
+                className="mt-auto pt-2 sm:pt-3 inline-flex items-center gap-1.5 sm:gap-2 text-xs text-[#A855F7] transition-colors hover:text-[#F43F5E]"
               >
                 <span>More on YouTube</span>
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </a>
 
             </div>
@@ -363,57 +364,57 @@ const Footer = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-1 flex"
           >
-            <div className="relative flex flex-col h-full overflow-hidden rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-6 backdrop-blur-xl">
-              <h3 className="mb-4 text-lg font-bold">
+            <div className="relative flex flex-col h-full overflow-hidden rounded-xl sm:rounded-2xl border border-[#A855F7]/20 bg-[#0B0B12]/60 p-3 sm:p-4 md:p-5 lg:p-6 backdrop-blur-xl">
+              <h3 className="mb-2 sm:mb-3 text-sm sm:text-base md:text-lg font-bold">
                 <span className="bg-gradient-to-r from-[#7C3AED] to-[#A855F7] bg-clip-text text-transparent">
                   Contact & Social
                 </span>
               </h3>
 
               {/* CTA Buttons */}
-              <div className="mb-6 space-y-3">
+              <div className="mb-3 sm:mb-4 md:mb-5 space-y-2 sm:space-y-2.5">
                 <a
                   href="https://wa.me/9647501234567"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-3 rounded-xl border border-[#7C3AED]/50 bg-gradient-to-r from-[#7C3AED]/20 to-[#A855F7]/20 px-5 py-3 font-semibold text-white transition-all hover:border-[#F43F5E] hover:bg-gradient-to-r hover:from-[#F43F5E]/30 hover:to-[#7C3AED]/30 hover:shadow-[0_0_25px_rgba(244,63,94,0.3)]"
+                  className="group flex items-center gap-2 sm:gap-2.5 md:gap-3 rounded-lg sm:rounded-xl border border-[#7C3AED]/50 bg-gradient-to-r from-[#7C3AED]/20 to-[#A855F7]/20 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 text-xs sm:text-sm md:text-base font-semibold text-white transition-all hover:border-[#F43F5E] hover:bg-gradient-to-r hover:from-[#F43F5E]/30 hover:to-[#7C3AED]/30 hover:shadow-[0_0_25px_rgba(244,63,94,0.3)]"
                 >
-                  <MessageCircle className="h-5 w-5 text-[#F59E0B]" />
+                  <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 text-[#F59E0B]" />
                   <span className="flex-1">WhatsApp Booking</span>
-                  <ExternalLink className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
+                  <ExternalLink className="h-3 w-3 sm:h-3.5 sm:w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
                 </a>
 
                 <a
                   href="tel:+9647501234567"
-                  className="group flex items-center gap-3 rounded-xl border border-[#A855F7]/30 bg-[#0B0B12]/40 px-5 py-3 font-semibold text-white transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/10"
+                  className="group flex items-center gap-2 sm:gap-2.5 md:gap-3 rounded-lg sm:rounded-xl border border-[#A855F7]/30 bg-[#0B0B12]/40 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 font-semibold text-white transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/10"
                 >
-                  <Phone className="h-5 w-5 text-[#A855F7] transition-colors group-hover:text-[#F43F5E]" />
-                  <span className="flex-1 text-sm">Call Now</span>
+                  <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-[#A855F7] transition-colors group-hover:text-[#F43F5E]" />
+                  <span className="flex-1 text-xs sm:text-sm">Call Now</span>
                 </a>
 
                 <a
                   href="mailto:booking@imadselim.com"
-                  className="group flex items-center gap-3 rounded-xl border border-[#A855F7]/30 bg-[#0B0B12]/40 px-5 py-3 font-semibold text-white transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/10"
+                  className="group flex items-center gap-2 sm:gap-2.5 md:gap-3 rounded-lg sm:rounded-xl border border-[#A855F7]/30 bg-[#0B0B12]/40 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 font-semibold text-white transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/10"
                 >
-                  <Mail className="h-5 w-5 text-[#A855F7] transition-colors group-hover:text-[#F43F5E]" />
-                  <span className="flex-1 text-sm">Email</span>
+                  <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-[#A855F7] transition-colors group-hover:text-[#F43F5E]" />
+                  <span className="flex-1 text-xs sm:text-sm">Email</span>
                 </a>
               </div>
 
               {/* Location */}
-              <div className="mb-6 rounded-xl border border-[#A855F7]/20 bg-[#0B0B12]/40 p-4">
-                <div className="mb-2 flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-[#A855F7]" />
+              <div className="mb-3 sm:mb-4 md:mb-5 rounded-lg sm:rounded-xl border border-[#A855F7]/20 bg-[#0B0B12]/40 p-2.5 sm:p-3 md:p-4">
+                <div className="mb-1.5 sm:mb-2 flex items-center gap-2 sm:gap-2.5">
+                  <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-[#A855F7]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Duhok, Kurdistan</p>
-                    <p className="text-xs text-white/50">Iraq</p>
+                    <p className="text-xs sm:text-sm font-semibold text-white">Duhok, Kurdistan</p>
+                    <p className="text-[10px] sm:text-xs text-white/50">Iraq</p>
                   </div>
                 </div>
                 <a
                   href="https://maps.google.com/?q=Duhok,Kurdistan,Iraq"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs text-[#A855F7] transition-colors hover:text-[#F43F5E]"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-[#A855F7] transition-colors hover:text-[#F43F5E]"
                 >
                   <ExternalLink className="h-3 w-3" />
                   <span>View on Google Maps</span>
@@ -422,10 +423,10 @@ const Footer = () => {
 
               {/* Social Icons */}
               <div>
-                <p className="mb-6 text-s font-bold uppercase tracking-wider text-white/50">
+                <p className="mb-2 sm:mb-3 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white/50">
                   Follow
                 </p>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-2.5">
                   {socialLinks.map((social) => (
                     <a
                       key={social.name}
@@ -433,9 +434,9 @@ const Footer = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       title={social.handle}
-                      className="group flex h-12 w-12 items-center justify-center rounded-xl border border-[#A855F7]/30 bg-gradient-to-b from-[#0B0B12]/90 to-[#0B0B12]/70 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-[#F43F5E] hover:bg-gradient-to-b hover:from-[#F43F5E]/20 hover:to-[#7C3AED]/20 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)]"
+                      className="group flex h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 items-center justify-center rounded-lg sm:rounded-xl border border-[#A855F7]/30 bg-gradient-to-b from-[#0B0B12]/90 to-[#0B0B12]/70 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-[#F43F5E] hover:bg-gradient-to-b hover:from-[#F43F5E]/20 hover:to-[#7C3AED]/20 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)]"
                     >
-                      <social.icon className="h-6 w-6 text-[#A855F7] transition-colors group-hover:text-[#F43F5E]" />
+                      <social.icon className="h-5 w-5 sm:h-5.5 sm:w-5.5 md:h-6 md:w-6 text-[#A855F7] transition-colors group-hover:text-[#F43F5E]" />
                     </a>
                   ))}
                 </div>
@@ -446,19 +447,19 @@ const Footer = () => {
       </div>
 
       {/* BOTTOM BAR */}
-      <div className="container relative z-10 mx-auto px-4 pb-8">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8 pb-4 sm:pb-5 md:pb-6 lg:pb-8">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="border-t border-[#A855F7]/10 pt-6"
+          className="border-t border-[#A855F7]/10 pt-3 sm:pt-4 md:pt-5"
         >
-          <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
-            <p className="text-sm text-white/50">
+          <div className="flex flex-col items-center justify-between gap-2 sm:gap-3 text-center md:flex-row md:text-left">
+            <p className="text-[10px] sm:text-xs md:text-sm text-white/50">
               © {currentYear} Imad Selim. All rights reserved.
             </p>
-            <p className="flex items-center gap-2 text-sm text-white/50">
+            <p className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs md:text-sm text-white/50">
               Made with{" "}
               <Heart className="h-4 w-4 fill-[#F43F5E] text-[#F43F5E]" />{" "}
               on the stage

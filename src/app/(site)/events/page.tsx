@@ -40,7 +40,7 @@ export default function EventsPage() {
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="container mx-auto px-4 pt-[120px] pb-20 md:pt-[150px]">
+        <div className="container mx-auto px-4 sm:px-5 md:px-6 pt-[100px] sm:pt-[110px] md:pt-[120px] pb-16 sm:pb-18 md:pb-20">
           {/* Page Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -73,8 +73,8 @@ export default function EventsPage() {
               <button
                 onClick={() => setFilter("all")}
                 className={`rounded-lg px-6 py-2.5 font-semibold transition-all ${filter === "all"
-                    ? "border border-[#7C3AED] bg-[#7C3AED]/20 text-white shadow-[0_0_20px_rgba(124,58,237,0.3)]"
-                    : "border border-white/20 bg-white/5 text-white/70 hover:border-[#7C3AED]/50 hover:text-white"
+                  ? "border border-[#7C3AED] bg-[#7C3AED]/20 text-white shadow-[0_0_20px_rgba(124,58,237,0.3)]"
+                  : "border border-white/20 bg-white/5 text-white/70 hover:border-[#7C3AED]/50 hover:text-white"
                   }`}
               >
                 All Events
@@ -82,8 +82,8 @@ export default function EventsPage() {
               <button
                 onClick={() => setFilter("upcoming")}
                 className={`rounded-lg px-6 py-2.5 font-semibold transition-all ${filter === "upcoming"
-                    ? "border border-[#7C3AED] bg-[#7C3AED]/20 text-white shadow-[0_0_20px_rgba(124,58,237,0.3)]"
-                    : "border border-white/20 bg-white/5 text-white/70 hover:border-[#7C3AED]/50 hover:text-white"
+                  ? "border border-[#7C3AED] bg-[#7C3AED]/20 text-white shadow-[0_0_20px_rgba(124,58,237,0.3)]"
+                  : "border border-white/20 bg-white/5 text-white/70 hover:border-[#7C3AED]/50 hover:text-white"
                   }`}
               >
                 Upcoming
@@ -91,8 +91,8 @@ export default function EventsPage() {
               <button
                 onClick={() => setFilter("past")}
                 className={`rounded-lg px-6 py-2.5 font-semibold transition-all ${filter === "past"
-                    ? "border border-[#7C3AED] bg-[#7C3AED]/20 text-white shadow-[0_0_20px_rgba(124,58,237,0.3)]"
-                    : "border border-white/20 bg-white/5 text-white/70 hover:border-[#7C3AED]/50 hover:text-white"
+                  ? "border border-[#7C3AED] bg-[#7C3AED]/20 text-white shadow-[0_0_20px_rgba(124,58,237,0.3)]"
+                  : "border border-white/20 bg-white/5 text-white/70 hover:border-[#7C3AED]/50 hover:text-white"
                   }`}
               >
                 Past Events

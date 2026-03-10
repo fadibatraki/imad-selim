@@ -34,13 +34,13 @@ const EventCard = ({ event, index = 0 }: EventCardProps) => {
         </div>
 
         {/* Content */}
-        <div className="relative p-6">
+        <div className="relative p-4 sm:p-5 md:p-6">
           {/* Status Badge */}
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-3 sm:mb-4 flex items-center justify-between">
             <span
               className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${event.status === "upcoming"
-                  ? "border border-[#F59E0B]/40 bg-[#F59E0B]/20 text-[#F59E0B]"
-                  : "border border-white/20 bg-white/5 text-white/60"
+                ? "border border-[#F59E0B]/40 bg-[#F59E0B]/20 text-[#F59E0B]"
+                : "border border-white/20 bg-white/5 text-white/60"
                 }`}
             >
               {event.status === "upcoming" ? "Upcoming" : "Past Event"}
@@ -48,25 +48,25 @@ const EventCard = ({ event, index = 0 }: EventCardProps) => {
           </div>
 
           {/* Event Title */}
-          <h3 className="mb-4 text-xl font-bold text-white transition-colors group-hover:text-[#A855F7]">
+          <h3 className="mb-3 sm:mb-4 text-lg sm:text-xl font-bold text-white transition-colors group-hover:text-[#A855F7]">
             {event.title}
           </h3>
 
           {/* Event Details */}
-          <div className="mb-4 space-y-2">
-            <div className="flex items-center gap-2 text-sm text-white/70">
+          <div className="mb-3 sm:mb-4 space-y-2">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm text-white/70">
               <Calendar className="h-4 w-4 text-[#7C3AED]" />
               <span>{formatDate(event.dateISO)}</span>
-              <Clock className="ml-2 h-4 w-4 text-[#7C3AED]" />
+              <Clock className="ml-0 sm:ml-2 h-4 w-4 text-[#7C3AED]" />
               <span>{event.time}</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-white/70">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-white/70">
               <MapPin className="h-4 w-4 text-[#7C3AED]" />
               <span>
                 {event.city}, {event.country}
               </span>
             </div>
-            <div className="text-sm text-white/60">{event.venue}</div>
+            <div className="text-xs sm:text-sm text-white/60">{event.venue}</div>
           </div>
 
           {/* CTA Button */}
@@ -74,7 +74,7 @@ const EventCard = ({ event, index = 0 }: EventCardProps) => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full rounded-lg border border-[#7C3AED]/50 bg-[#7C3AED]/20 px-5 py-2.5 font-semibold text-white transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/20 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)]"
+              className="w-full rounded-lg border border-[#7C3AED]/50 bg-[#7C3AED]/20 px-4 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E]/20 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)]"
             >
               View Details
             </motion.button>
