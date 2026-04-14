@@ -62,75 +62,46 @@ export const photos: Photo[] = [
     alt: "Berlin cultural exchange night",
     category: "Concerts"
   },
-  {
-    id: 8,
-    src: "/images/media/photos/studio-2.jpg",
-    alt: "Working on new compositions",
-    category: "Studio"
-  },
-  {
-    id: 9,
-    src: "/images/media/photos/portrait-3.jpg",
-    alt: "Traditional Kurdish attire photoshoot",
-    category: "Portraits"
-  },
-  {
-    id: 10,
-    src: "/images/media/photos/concert-5.jpg",
-    alt: "Intimate acoustic performance",
-    category: "Concerts"
-  },
-  {
-    id: 11,
-    src: "/images/media/photos/studio-3.jpg",
-    alt: "Collaborating with musicians",
-    category: "Studio"
-  },
-  {
-    id: 12,
-    src: "/images/media/photos/portrait-4.jpg",
-    alt: "Natural light portrait session",
-    category: "Portraits"
-  }
+  
 ];
 
 export const videos: Video[] = [
   {
     id: 1,
-    title: "Kurdish Heritage Festival 2025 - Full Performance",
-    youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    dateISO: "2025-04-15"
+    title: "Imad Selim - Official Music Video",
+    youtubeUrl: "https://www.youtube.com/embed/OoNDOBWy8-U",
+    dateISO: "2025-12-15"
   },
   {
     id: 2,
-    title: "Behind the Scenes: Recording Traditional Songs",
-    youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    dateISO: "2025-11-20"
+    title: "Imad Selim - Latest Release",
+    youtubeUrl: "https://www.youtube.com/embed/ZXIKx7Oih3s",
+    dateISO: "2025-10-20"
   },
   {
     id: 3,
-    title: "Newroz Celebration Concert Highlights",
-    youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    dateISO: "2026-03-21"
+    title: "Imad Selim - Live Performance",
+    youtubeUrl: "https://www.youtube.com/embed/mgzHRYZRqWA",
+    dateISO: "2025-08-10"
   },
   {
     id: 4,
-    title: "Interview: Preserving Kurdish Musical Heritage",
-    youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    dateISO: "2025-10-05"
+    title: "Imad Selim - Traditional Songs",
+    youtubeUrl: "https://www.youtube.com/embed/V4vckowqtjI",
+    dateISO: "2025-06-05"
   },
-  {
+   {
     id: 5,
-    title: "Live from Berlin Cultural Exchange",
-    youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    dateISO: "2025-11-12"
+    title: "Imad Selim - Traditional Songs",
+    youtubeUrl: "https://www.youtube.com/embed/1Nelxxoxewc",
+    dateISO: "2025-06-05"
   },
-  {
+   {
     id: 6,
-    title: "Acoustic Session: Traditional Melodies",
-    youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    dateISO: "2026-01-18"
-  }
+    title: "Imad Selim - Traditional Songs",
+    youtubeUrl: "https://www.youtube.com/embed/nPcMxAZP2Sk",
+    dateISO: "2025-06-05"
+  },
 ];
 
 export const posters: Poster[] = [

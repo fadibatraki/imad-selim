@@ -1,12 +1,38 @@
 "use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Music, ArrowRight } from "lucide-react";
+import { Music, ArrowRight, Loader2 } from "lucide-react";
 import TrackCard from "@/components/music/TrackCard";
-import { singles } from "@/data/music";
+import { Track } from "@/data/music";
 
 const LatestReleases = () => {
-  const latestSingles = singles.slice(0, 3);
+  const [latestSingles, setLatestSingles] = useState<Track[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchLatestReleases = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/spotify/latest-releases');
+        const result = await response.json();
+
+        if (result.success) {
+          setLatestSingles(result.data);
+        } else {
+          setError(result.error || 'Failed to load releases');
+        }
+      } catch (err) {
+        setError('Failed to connect to Spotify');
+        console.error('Error fetching latest releases:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLatestReleases();
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-[#07070B] py-20 md:py-[120px]">
@@ -63,11 +89,28 @@ const LatestReleases = () => {
         </motion.div>
 
         {/* Singles Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {latestSingles.map((single, index) => (
-            <TrackCard key={single.id} track={single} index={index} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex justify-center py-20">
+            <Loader2 className="h-12 w-12 animate-spin text-[#7C3AED]" />
+          </div>
+        ) : error ? (
+          <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-8 text-center">
+            <p className="text-lg text-red-400">{error}</p>
+            <p className="mt-2 text-sm text-white/60">
+              Make sure you've set up your Spotify API credentials in .env.local
+            </p>
+          </div>
+        ) : latestSingles.length === 0 ? (
+          <div className="rounded-xl border border-white/10 bg-white/5 p-8 text-center">
+            <p className="text-lg text-white/60">No releases found</p>
+          </div>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {latestSingles.map((single, index) => (
+              <TrackCard key={single.id} track={single} index={index} />
+            ))}
+          </div>
+        )}
 
         {/* View All Button */}
         <motion.div

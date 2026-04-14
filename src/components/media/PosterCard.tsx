@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import { FileImage, Calendar } from "lucide-react";
+import Image from "next/image";
+import { Calendar } from "lucide-react";
 import { Poster } from "@/data/media";
 
 interface PosterCardProps {
@@ -28,25 +29,21 @@ const PosterCard = ({ poster, index = 0 }: PosterCardProps) => {
     >
       <div className="relative overflow-hidden rounded-2xl border border-[#A855F7]/30 bg-gradient-to-b from-[#0B0B12]/90 to-[#0B0B12]/95 backdrop-blur-xl transition-all duration-300 hover:border-[#A855F7]/50">
         {/* Glow effect on hover */}
-        <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <div className="absolute inset-0 bg-[#7C3AED]/10" />
         </div>
 
-        {/* Poster Placeholder */}
-        <div className="relative aspect-[2/3] bg-gradient-to-br from-[#7C3AED]/30 to-[#F43F5E]/20">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              className="h-48 w-48 rounded-full bg-[#7C3AED]/40 blur-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.4, 0.6, 0.4],
-              }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
-            <div className="absolute">
-              <FileImage className="h-24 w-24 text-white/20" />
-            </div>
-          </div>
+        {/* Poster Image */}
+        <div className="relative aspect-[2/3]">
+          <Image
+            src={poster.src}
+            alt={poster.title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+
+          {/* Dark overlay */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B0B12]/60 via-transparent to-transparent" />
         </div>
 
         {/* Poster Info */}
@@ -62,7 +59,7 @@ const PosterCard = ({ poster, index = 0 }: PosterCardProps) => {
 
         {/* Border glow animation */}
         <motion.div
-          className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
               "linear-gradient(90deg, transparent, rgba(124,58,237,0.4), transparent)",
