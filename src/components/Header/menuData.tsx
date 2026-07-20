@@ -38,5 +38,11 @@ const menuData: Menu[] = [
   ...(siteFeatures.youtube
     ? [{ id: 8, title: "YouTube", path: "/youtube", newTab: false }]
     : []),
+  ...(siteFeatures.instagram
+    ? [{ id: 9, title: "Instagram", path: "/instagram", newTab: false }]
+    : []),
+  ...(siteFeatures.tiktok
+    ? [{ id: 10, title: "TikTok", path: "/tiktok", newTab: false }]
+    : []),
 ];
 export default menuData;

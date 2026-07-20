@@ -5,6 +5,8 @@ import Stories from "@/components/Stories";
 import Media from "@/components/Media";
 import LatestReleases from "@/components/LatestReleases";
 import YouTubeSongs from "@/components/YouTubeSongs";
+import InstagramReels from "@/components/InstagramReels";
+import TikTokVideos from "@/components/TikTokVideos";
 import Hero from "@/components/Hero";
 import ProductsSection from "@/components/Products";
 import { Metadata } from "next";
@@ -28,6 +30,8 @@ export default function Home() {
       <Media />
       {siteFeatures.music && <LatestReleases />}
       {siteFeatures.youtube && <YouTubeSongs limit={3} showViewAll />}
+      {siteFeatures.instagram && <InstagramReels limit={3} showViewAll />}
+      {siteFeatures.tiktok && <TikTokVideos limit={3} showViewAll />}
     </main>
   );
 }

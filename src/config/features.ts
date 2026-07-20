@@ -7,4 +7,6 @@ export const siteFeatures = {
   stories: false,
   music: false,
   youtube: true,
+  instagram: true,
+  tiktok: true,
 } as const;

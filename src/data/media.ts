@@ -62,7 +62,66 @@ export const photos: Photo[] = [
     alt: "Berlin cultural exchange night",
     category: "Concerts"
   },
-  
+   {
+    id: 8,
+    src: "/images/profile/8.jpeg",
+    alt: "Berlin cultural exchange night",
+    category: "Concerts"
+  },
+   {
+    id: 9,
+    src: "/images/profile/9.jpeg",
+    alt: "Berlin cultural exchange night",
+    category: "Concerts"
+  },
+   {
+    id: 10,
+    src: "/images/profile/10.jpeg",
+    alt: "Berlin cultural exchange night",
+    category: "Concerts"
+  },
+   {
+    id: 11,
+    src: "/images/profile/11.jpeg",
+    alt: "Berlin cultural exchange night",
+    category: "Concerts"
+  },
+   {
+    id: 12,
+    src: "/images/profile/12.jpeg",
+    alt: "Berlin cultural exchange night",
+    category: "Concerts"
+  },
+   {
+    id: 13,
+    src: "/images/profile/13.jpeg",
+    alt: "Berlin cultural exchange night",
+    category: "Concerts"
+  },
+   {
+    id: 14,
+    src: "/images/profile/14.jpeg",
+    alt: "Berlin cultural exchange night",
+    category: "Concerts"
+  },
+   {
+    id: 15,
+    src: "/images/profile/15.jpeg",
+    alt: "Berlin cultural exchange night",
+    category: "Concerts"
+  },
+     {
+    id: 16,
+    src: "/images/profile/16.jpeg",
+    alt: "Berlin cultural exchange night",
+    category: "Concerts"
+  },
+     {
+    id: 17,
+    src: "/images/profile/17.jpeg",
+    alt: "Berlin cultural exchange night",
+    category: "Concerts"
+  },
 ];
 
 export const videos: Video[] = [
@@ -140,5 +199,6 @@ export const posters: Poster[] = [
     src: "/images/media/posters/istanbul-gala.jpg",
     title: "Istanbul Cross-Cultural Gala",
     dateISO: "2026-06-20"
-  }
+  },
+  
 ];
