@@ -5,8 +5,11 @@ import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, BookOpen } from "lucide-react";
 import { getStoryBySlug, getRelatedStories } from "@/data/stories";
 import StoryCard from "@/components/stories/StoryCard";
+import { siteFeatures } from "@/config/features";
 
 export default function StoryDetailPage() {
+  if (!siteFeatures.stories) notFound();
+
   const params = useParams();
   const slug = params?.slug as string;
 
@@ -36,7 +39,7 @@ export default function StoryDetailPage() {
       {/* Animated background */}
       <div className="fixed inset-0 z-0">
         <motion.div
-          className="absolute left-1/3 top-20 h-96 w-96 rounded-full bg-[#7C3AED]/25 blur-[120px]"
+          className="absolute top-20 left-1/3 h-96 w-96 rounded-full bg-[#7C3AED]/25 blur-[120px]"
           animate={{
             x: [0, 40, 0],
             scale: [1, 1.15, 1],
@@ -45,18 +48,23 @@ export default function StoryDetailPage() {
         />
 
         <motion.div
-          className="absolute right-1/3 top-40 h-96 w-96 rounded-full bg-[#F59E0B]/18 blur-[120px]"
+          className="absolute top-40 right-1/3 h-96 w-96 rounded-full bg-[#F59E0B]/18 blur-[120px]"
           animate={{
             x: [0, -40, 0],
             scale: [1, 1.2, 1],
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
         />
       </div>
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="container mx-auto px-4 sm:px-5 md:px-6 pt-[100px] sm:pt-[110px] md:pt-[120px] pb-16 sm:pb-18 md:pb-20">
+        <div className="container mx-auto px-4 pt-[100px] pb-16 sm:px-5 sm:pt-[110px] sm:pb-18 md:px-6 md:pt-[120px] md:pb-20">
           {/* Back button */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -181,7 +189,11 @@ export default function StoryDetailPage() {
               </h2>
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {relatedStories.map((relatedStory, index) => (
-                  <StoryCard key={relatedStory.id} story={relatedStory} index={index} />
+                  <StoryCard
+                    key={relatedStory.id}
+                    story={relatedStory}
+                    index={index}
+                  />
                 ))}
               </div>
             </motion.div>

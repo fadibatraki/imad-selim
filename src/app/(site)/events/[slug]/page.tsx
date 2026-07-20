@@ -4,8 +4,11 @@ import { notFound, useParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Calendar, MapPin, Clock, Sparkles } from "lucide-react";
 import { getEventBySlug } from "@/data/events";
+import { siteFeatures } from "@/config/features";
 
 export default function EventDetailPage() {
+  if (!siteFeatures.events) notFound();
+
   const params = useParams();
   const slug = params?.slug as string;
 
@@ -34,7 +37,7 @@ export default function EventDetailPage() {
       {/* Animated background */}
       <div className="fixed inset-0 z-0">
         <motion.div
-          className="absolute left-1/3 top-20 h-96 w-96 rounded-full bg-[#7C3AED]/25 blur-[120px]"
+          className="absolute top-20 left-1/3 h-96 w-96 rounded-full bg-[#7C3AED]/25 blur-[120px]"
           animate={{
             x: [0, 40, 0],
             scale: [1, 1.15, 1],
@@ -43,18 +46,23 @@ export default function EventDetailPage() {
         />
 
         <motion.div
-          className="absolute right-1/3 top-40 h-96 w-96 rounded-full bg-[#F59E0B]/18 blur-[120px]"
+          className="absolute top-40 right-1/3 h-96 w-96 rounded-full bg-[#F59E0B]/18 blur-[120px]"
           animate={{
             x: [0, -40, 0],
             scale: [1, 1.2, 1],
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
         />
       </div>
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="container mx-auto px-4 sm:px-5 md:px-6 pt-[100px] sm:pt-[110px] md:pt-[120px] pb-16 sm:pb-18 md:pb-20">
+        <div className="container mx-auto px-4 pt-[100px] pb-16 sm:px-5 sm:pt-[110px] sm:pb-18 md:px-6 md:pt-[120px] md:pb-20">
           {/* Back button */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -120,7 +128,9 @@ export default function EventDetailPage() {
                   className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-[#F59E0B]/40 bg-[#F59E0B]/20 px-4 py-2 backdrop-blur-xl"
                 >
                   <Sparkles className="h-4 w-4 text-[#F59E0B]" />
-                  <span className="text-sm font-bold text-white">Upcoming Event</span>
+                  <span className="text-sm font-bold text-white">
+                    Upcoming Event
+                  </span>
                 </motion.div>
               )}
 
@@ -133,7 +143,9 @@ export default function EventDetailPage() {
               <div className="mb-8 space-y-4 rounded-2xl border border-[#7C3AED]/20 bg-[#0B0B12]/60 p-6 backdrop-blur-xl">
                 <div className="flex items-center gap-3 text-white">
                   <Calendar className="h-5 w-5 text-[#7C3AED]" />
-                  <span className="font-semibold">{formatDate(event.dateISO)}</span>
+                  <span className="font-semibold">
+                    {formatDate(event.dateISO)}
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 text-white">
                   <Clock className="h-5 w-5 text-[#7C3AED]" />
@@ -152,14 +164,20 @@ export default function EventDetailPage() {
 
               {/* Description */}
               <div className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-white">About This Event</h2>
-                <p className="text-lg leading-relaxed text-white/70">{event.description}</p>
+                <h2 className="mb-4 text-2xl font-bold text-white">
+                  About This Event
+                </h2>
+                <p className="text-lg leading-relaxed text-white/70">
+                  {event.description}
+                </p>
               </div>
 
               {/* Highlights */}
               {event.highlights && event.highlights.length > 0 && (
                 <div className="mb-8">
-                  <h3 className="mb-4 text-xl font-bold text-white">Event Highlights</h3>
+                  <h3 className="mb-4 text-xl font-bold text-white">
+                    Event Highlights
+                  </h3>
                   <ul className="space-y-2">
                     {event.highlights.map((highlight, index) => (
                       <li key={index} className="flex items-start gap-3">
@@ -176,7 +194,7 @@ export default function EventDetailPage() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="group relative w-full overflow-hidden rounded-xl border border-[#7C3AED]/50 bg-[#7C3AED] px-8 py-4 text-lg font-bold text-white shadow-[0_0_30px_rgba(124,58,237,0.4)] transition-all hover:bg-[#F43F5E] hover:border-[#F43F5E] hover:shadow-[0_0_40px_rgba(244,63,94,0.5)]"
+                  className="group relative w-full overflow-hidden rounded-xl border border-[#7C3AED]/50 bg-[#7C3AED] px-8 py-4 text-lg font-bold text-white shadow-[0_0_30px_rgba(124,58,237,0.4)] transition-all hover:border-[#F43F5E] hover:bg-[#F43F5E] hover:shadow-[0_0_40px_rgba(244,63,94,0.5)]"
                 >
                   Contact for Collaboration
                 </motion.button>

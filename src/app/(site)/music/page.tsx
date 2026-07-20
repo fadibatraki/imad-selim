@@ -5,8 +5,12 @@ import { Music, Disc3, Headphones } from "lucide-react";
 import TrackCard from "@/components/music/TrackCard";
 import AlbumCard from "@/components/music/AlbumCard";
 import { featuredRelease, singles, albums } from "@/data/music";
+import { notFound } from "next/navigation";
+import { siteFeatures } from "@/config/features";
 
 const MusicPage = () => {
+  if (!siteFeatures.music) notFound();
+
   const [activeTab, setActiveTab] = useState<"singles" | "albums">("singles");
 
   return (
@@ -14,7 +18,7 @@ const MusicPage = () => {
       {/* Animated background */}
       <div className="absolute inset-0 z-0">
         <motion.div
-          className="absolute left-1/4 top-20 h-96 w-96 rounded-full bg-[#7C3AED]/20 blur-[120px]"
+          className="absolute top-20 left-1/4 h-96 w-96 rounded-full bg-[#7C3AED]/20 blur-[120px]"
           animate={{
             x: [0, 30, 0],
             scale: [1, 1.15, 1],
@@ -23,17 +27,22 @@ const MusicPage = () => {
         />
 
         <motion.div
-          className="absolute right-1/4 top-40 h-96 w-96 rounded-full bg-[#F43F5E]/15 blur-[120px]"
+          className="absolute top-40 right-1/4 h-96 w-96 rounded-full bg-[#F43F5E]/15 blur-[120px]"
           animate={{
             x: [0, -30, 0],
             scale: [1, 1.2, 1],
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
         />
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 mx-auto px-4 sm:px-5 md:px-6">
+      <div className="relative z-10 container mx-auto px-4 sm:px-5 md:px-6">
         {/* Page Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -58,7 +67,8 @@ const MusicPage = () => {
           </h1>
 
           <p className="text-lg text-white/60">
-            Explore my musical journey through singles and albums, blending traditional Kurdish melodies with contemporary sounds
+            Explore my musical journey through singles and albums, blending
+            traditional Kurdish melodies with contemporary sounds
           </p>
         </motion.div>
 
@@ -72,7 +82,7 @@ const MusicPage = () => {
           >
             <div className="relative overflow-hidden rounded-3xl border border-[#F59E0B]/50 bg-gradient-to-br from-[#0B0B12]/95 to-[#0B0B12]/90 p-8 backdrop-blur-xl md:p-12">
               {/* Featured Badge */}
-              <div className="absolute right-6 top-6 rounded-full border border-[#F59E0B]/50 bg-[#F59E0B]/20 px-4 py-2 text-sm font-bold text-[#F59E0B] backdrop-blur-xl">
+              <div className="absolute top-6 right-6 rounded-full border border-[#F59E0B]/50 bg-[#F59E0B]/20 px-4 py-2 text-sm font-bold text-[#F59E0B] backdrop-blur-xl">
                 ⭐ FEATURED RELEASE
               </div>
 
@@ -105,9 +115,18 @@ const MusicPage = () => {
                   </p>
 
                   <div className="mb-6 flex items-center gap-4 text-sm text-white/50">
-                    <span className="font-semibold text-[#F59E0B]">{featuredRelease.duration}</span>
+                    <span className="font-semibold text-[#F59E0B]">
+                      {featuredRelease.duration}
+                    </span>
                     <span>•</span>
-                    <span>{new Date(featuredRelease.releaseDateISO).toLocaleDateString("en-US", { month: "long", year: "numeric" })}</span>
+                    <span>
+                      {new Date(
+                        featuredRelease.releaseDateISO,
+                      ).toLocaleDateString("en-US", {
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </span>
                   </div>
 
                   {/* Action Buttons */}
@@ -150,20 +169,22 @@ const MusicPage = () => {
           <div className="inline-flex rounded-2xl border border-[#A855F7]/30 bg-[#0B0B12]/80 p-1.5 backdrop-blur-xl">
             <button
               onClick={() => setActiveTab("singles")}
-              className={`flex items-center gap-2 rounded-xl px-8 py-3 font-semibold transition-all ${activeTab === "singles"
-                ? "bg-[#7C3AED] text-white shadow-[0_0_20px_rgba(124,58,237,0.5)]"
-                : "text-white/60 hover:text-white"
-                }`}
+              className={`flex items-center gap-2 rounded-xl px-8 py-3 font-semibold transition-all ${
+                activeTab === "singles"
+                  ? "bg-[#7C3AED] text-white shadow-[0_0_20px_rgba(124,58,237,0.5)]"
+                  : "text-white/60 hover:text-white"
+              }`}
             >
               <Music className="h-5 w-5" />
               Singles ({singles.length})
             </button>
             <button
               onClick={() => setActiveTab("albums")}
-              className={`flex items-center gap-2 rounded-xl px-8 py-3 font-semibold transition-all ${activeTab === "albums"
-                ? "bg-[#7C3AED] text-white shadow-[0_0_20px_rgba(124,58,237,0.5)]"
-                : "text-white/60 hover:text-white"
-                }`}
+              className={`flex items-center gap-2 rounded-xl px-8 py-3 font-semibold transition-all ${
+                activeTab === "albums"
+                  ? "bg-[#7C3AED] text-white shadow-[0_0_20px_rgba(124,58,237,0.5)]"
+                  : "text-white/60 hover:text-white"
+              }`}
             >
               <Disc3 className="h-5 w-5" />
               Albums ({albums.length})

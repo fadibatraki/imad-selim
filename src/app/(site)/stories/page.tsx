@@ -3,8 +3,12 @@ import { motion } from "framer-motion";
 import { BookOpen, Sparkles } from "lucide-react";
 import StoryCard from "@/components/stories/StoryCard";
 import { stories, getFeaturedStory } from "@/data/stories";
+import { notFound } from "next/navigation";
+import { siteFeatures } from "@/config/features";
 
 export default function StoriesPage() {
+  if (!siteFeatures.stories) notFound();
+
   const featuredStory = getFeaturedStory();
   const regularStories = stories.filter((story) => !story.featured);
 
@@ -13,7 +17,7 @@ export default function StoriesPage() {
       {/* Animated background */}
       <div className="fixed inset-0 z-0">
         <motion.div
-          className="absolute left-1/4 top-20 h-96 w-96 rounded-full bg-[#7C3AED]/20 blur-[120px]"
+          className="absolute top-20 left-1/4 h-96 w-96 rounded-full bg-[#7C3AED]/20 blur-[120px]"
           animate={{
             x: [0, 40, 0],
             scale: [1, 1.15, 1],
@@ -22,18 +26,23 @@ export default function StoriesPage() {
         />
 
         <motion.div
-          className="absolute right-1/4 top-40 h-96 w-96 rounded-full bg-[#F43F5E]/15 blur-[120px]"
+          className="absolute top-40 right-1/4 h-96 w-96 rounded-full bg-[#F43F5E]/15 blur-[120px]"
           animate={{
             x: [0, -40, 0],
             scale: [1, 1.2, 1],
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
         />
       </div>
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="container mx-auto px-4 sm:px-5 md:px-6 pt-[100px] sm:pt-[110px] md:pt-[120px] pb-16 sm:pb-18 md:pb-20">
+        <div className="container mx-auto px-4 pt-[100px] pb-16 sm:px-5 sm:pt-[110px] sm:pb-18 md:px-6 md:pt-[120px] md:pb-20">
           {/* Page Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -58,7 +67,8 @@ export default function StoriesPage() {
             </h1>
 
             <p className="text-lg text-white/60 md:text-xl">
-              Explore the rich tapestry of Kurdish culture through music, heritage, and personal journeys
+              Explore the rich tapestry of Kurdish culture through music,
+              heritage, and personal journeys
             </p>
           </motion.div>
 

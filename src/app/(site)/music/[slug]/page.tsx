@@ -5,8 +5,11 @@ import { ArrowLeft, Disc3, Calendar, Play, Clock } from "lucide-react";
 import Link from "next/link";
 import { albums } from "@/data/music";
 import { notFound } from "next/navigation";
+import { siteFeatures } from "@/config/features";
 
 const AlbumDetailPage = () => {
+  if (!siteFeatures.music) notFound();
+
   const params = useParams();
   const slug = params?.slug as string;
 
@@ -44,7 +47,7 @@ const AlbumDetailPage = () => {
       {/* Animated background */}
       <div className="absolute inset-0 z-0">
         <motion.div
-          className="absolute left-1/4 top-20 h-96 w-96 rounded-full bg-[#7C3AED]/20 blur-[120px]"
+          className="absolute top-20 left-1/4 h-96 w-96 rounded-full bg-[#7C3AED]/20 blur-[120px]"
           animate={{
             x: [0, 30, 0],
             scale: [1, 1.15, 1],
@@ -53,17 +56,22 @@ const AlbumDetailPage = () => {
         />
 
         <motion.div
-          className="absolute right-1/4 top-40 h-96 w-96 rounded-full bg-[#F43F5E]/15 blur-[120px]"
+          className="absolute top-40 right-1/4 h-96 w-96 rounded-full bg-[#F43F5E]/15 blur-[120px]"
           animate={{
             x: [0, -30, 0],
             scale: [1, 1.2, 1],
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
         />
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 mx-auto px-4 sm:px-5 md:px-6">
+      <div className="relative z-10 container mx-auto px-4 sm:px-5 md:px-6">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -125,18 +133,22 @@ const AlbumDetailPage = () => {
                 </span>
               </h1>
 
-              <p className="mb-8 text-lg text-white/70 leading-relaxed">
+              <p className="mb-8 text-lg leading-relaxed text-white/70">
                 {album.description}
               </p>
 
               <div className="flex items-center gap-6 text-sm text-white/60">
                 <div className="flex items-center gap-2">
                   <Disc3 className="h-5 w-5 text-[#7C3AED]" />
-                  <span className="font-semibold text-white">{album.tracks.length} tracks</span>
+                  <span className="font-semibold text-white">
+                    {album.tracks.length} tracks
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="h-5 w-5 text-[#7C3AED]" />
-                  <span className="font-semibold text-white">{formatTotalDuration(totalDuration)}</span>
+                  <span className="font-semibold text-white">
+                    {formatTotalDuration(totalDuration)}
+                  </span>
                 </div>
               </div>
             </div>
@@ -186,7 +198,7 @@ const AlbumDetailPage = () => {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center rounded-lg border border-[#7C3AED]/50 bg-[#7C3AED]/20 px-4 py-2 text-sm font-semibold text-white opacity-0 transition-all group-hover:opacity-100 hover:border-[#F43F5E] hover:bg-[#F43F5E]/30"
                     >
-                      <Play className="h-4 w-4 mr-1" />
+                      <Play className="mr-1 h-4 w-4" />
                       Watch
                     </a>
                   )}
