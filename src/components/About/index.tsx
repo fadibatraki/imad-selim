@@ -502,27 +502,21 @@ const About = () => {
                 className="mb-8 space-y-4 text-base leading-relaxed text-white/70 sm:text-lg"
               >
                 <p>
-                  From the mountains of Turkey to the plains of Syria, and then
-                  onward to Germany, Emad’s journey began—carrying with him a
-                  dream greater than borders and a passion that knew no
-                  end.{" "}
+                 Ji çiyayên Tirkiyeyê bigire heta  deştên sûriyeyê,û dû re jî heta şaristaniya Almanya...rêwîtiya Emad dest pê kir,xewnek ku sînoran derbas dikir 
+                 û hewesek ku bêdawî nedizanî bi xwe re hildigirt. {" "}
                 </p>
                 <p>
-                  He was not merely an artist and musician, but a guardian of a
-                  rich musical heritage. He revived and renewed Kurdish musical
-                  traditions, restoring their melodies to their authentic pulse
-                  while preserving their spirit and identity through time.{" "}
+                  Ew ne tenê  hunermed û muzîkjenek bû,lê belê parêzvanê mîrateyek 
+                 dewlemnd a  muzîkê bû,kevneşopiyên kurdî nû dikir û vejand, lêdana wan a resen vedigerand melodiyan,û ruh û nasnameya 
+                 wan di demê re,diparast.{" "}
                 </p>
                 <p>
-                  Within his memory live thousands of songs and melodies,
-                  preserved like a living legacy that tells the stories of an
-                  entire people.{" "}
+                 Di bîranîna wî dê  bi hezaran stran û melodî hene ku wekî mîrateyek zindî têne parastin ku 
+                 çîrokên tevahiya gelekî vedibêje.{" "}
                 </p>
                 <p>
-                  For him, music was never merely an art—it was a message: to
-                  keep the heritage alive, and to ensure that its melodies
-                  remain witnesses to their roots, no matter how the lands may
-                  change.{" "}
+                 Ji bo wî ,muzîk ne tenê hunerek bû, lê peyamek bû...ji,bo ku mîrat zindî bimîne, 
+                 û ji bo ku melodî şahidên kokan bimînin çi qas erd biguhere ji.{" "}
                 </p>
               </motion.div>
             </motion.div>
