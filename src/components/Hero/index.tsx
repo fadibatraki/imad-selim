@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
@@ -49,6 +49,38 @@ type Bokeh = {
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [canLoadBackgroundVideo, setCanLoadBackgroundVideo] = useState(false);
+
+  // The hero video is large, so keep it out of the critical loading path. On
+  // small screens the visual is subtle enough that skipping it saves a large
+  // download and considerably reduces decoding work.
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!media.matches || reducedMotion.matches) return;
+
+    let idleId: number | undefined;
+    let timerId: ReturnType<typeof setTimeout> | undefined;
+    const scheduleVideo = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(
+          () => setCanLoadBackgroundVideo(true),
+          { timeout: 2500 },
+        );
+      } else {
+        timerId = setTimeout(() => setCanLoadBackgroundVideo(true), 1500);
+      }
+    };
+
+    if (document.readyState === "complete") scheduleVideo();
+    else window.addEventListener("load", scheduleVideo, { once: true });
+
+    return () => {
+      window.removeEventListener("load", scheduleVideo);
+      if (idleId !== undefined) window.cancelIdleCallback(idleId);
+      if (timerId !== undefined) clearTimeout(timerId);
+    };
+  }, []);
 
   // Parallax
   const mouseX = useMotionValue(0);
@@ -153,16 +185,19 @@ export default function Hero() {
         <StageLasers />
         {/* LED wall tiles (fills the whole background including edges) */}
         {/* Background live performance video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.22] pointer-events-none"
-        >
-          <source src="/images/hero/imadselim.mp4" type="video/mp4" />
-        </video>
+        {canLoadBackgroundVideo && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster="/images/hero/hero-image.jpg"
+            className="absolute inset-0 h-full w-full object-cover opacity-[0.22] pointer-events-none"
+          >
+            <source src="/images/hero/imadselim.webm" type="video/mp4" />
+          </video>
+        )}
 
         {/* optional: fade so text stays clear */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />

@@ -141,6 +141,7 @@ const Media = () => {
                 <iframe
                   src={featuredVideo.youtubeUrl}
                   title={featuredVideo.title}
+                  loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="h-full w-full"

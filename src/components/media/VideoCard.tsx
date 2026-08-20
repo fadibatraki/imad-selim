@@ -32,6 +32,7 @@ const VideoCard = ({ video, index = 0 }: VideoCardProps) => {
           <iframe
             src={video.youtubeUrl}
             title={video.title}
+            loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="h-full w-full"
