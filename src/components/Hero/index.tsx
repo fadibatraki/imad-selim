@@ -105,7 +105,7 @@ export default function Hero() {
   // Floating notes (deterministic)
   const floatingNotes = useMemo<FloatNote[]>(() => {
     const chars = ["♪", "♫", "♬", "♩"];
-    return Array.from({ length: 16 }, (_, i) => {
+    return Array.from({ length: 8 }, (_, i) => {
       const r1 = seededRandom(i * 11 + 1);
       const r2 = seededRandom(i * 11 + 2);
       const r3 = seededRandom(i * 11 + 3);
@@ -125,7 +125,7 @@ export default function Hero() {
   }, []);
 
   const eqBars = useMemo<EqBar[]>(() => {
-    return Array.from({ length: 64 }, (_, i) => {
+    return Array.from({ length: 32 }, (_, i) => {
       const r1 = seededRandom(i * 7 + 1);
       const r2 = seededRandom(i * 7 + 2);
       const r3 = seededRandom(i * 7 + 3);
@@ -142,7 +142,7 @@ export default function Hero() {
   // Big bokeh lights (stage vibe)
   const bokeh = useMemo<Bokeh[]>(() => {
     const hues: Bokeh["hue"][] = ["purple", "glow", "pink"];
-    return Array.from({ length: 14 }, (_, i) => {
+    return Array.from({ length: 6 }, (_, i) => {
       const r1 = seededRandom(i * 31 + 1);
       const r2 = seededRandom(i * 31 + 2);
       const r3 = seededRandom(i * 31 + 3);
@@ -195,7 +195,7 @@ export default function Hero() {
             poster="/images/hero/hero-image.jpg"
             className="absolute inset-0 h-full w-full object-cover opacity-[0.22] pointer-events-none"
           >
-            <source src="/images/hero/imadselim.webm" type="video/mp4" />
+            <source src="/images/hero/imadselim.webm" type="video/webm" />
           </video>
         )}
 
@@ -438,7 +438,7 @@ function SpotlightsStrong() {
 function RhythmLinesStrong() {
   return (
     <div className="pointer-events-none absolute inset-0 opacity-35">
-      {Array.from({ length: 12 }).map((_, i) => (
+      {Array.from({ length: 6 }).map((_, i) => (
         <motion.div
           key={i}
           className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent"
@@ -490,7 +490,7 @@ function FloatingNotes({ notes }: { notes: FloatNote[] }) {
 
 function Waveform() {
   const bars = useMemo(() => {
-    return Array.from({ length: 28 }, (_, i) => {
+    return Array.from({ length: 16 }, (_, i) => {
       const r1 = seededRandom(i * 9 + 1);
       const r2 = seededRandom(i * 9 + 2);
       return { base: 8 + r1 * 10, amp: 12 + r2 * 18, d: i * 0.04 };

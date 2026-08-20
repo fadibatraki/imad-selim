@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Instagram } from "lucide-react";
 import { InstagramReel } from "@/data/instagram-reels";
@@ -10,6 +11,7 @@ interface InstagramReelCardProps {
 }
 
 const InstagramReelCard = ({ reel, index = 0 }: InstagramReelCardProps) => {
+  const [showEmbed, setShowEmbed] = useState(false);
   const embedUrl = `${reel.url.replace(/\/$/, "")}/embed/captioned/`;
 
   return (
@@ -22,13 +24,24 @@ const InstagramReelCard = ({ reel, index = 0 }: InstagramReelCardProps) => {
     >
       <div className="overflow-hidden rounded-2xl border border-[#A855F7]/30 bg-gradient-to-b from-[#0B0B12]/90 to-[#0B0B12]/95 backdrop-blur-xl transition-all duration-300 hover:border-[#F43F5E]/60 hover:shadow-[0_0_32px_rgba(244,63,94,0.12)]">
         <div className="relative h-[610px] overflow-hidden bg-white sm:h-[660px]">
-          <iframe
-            src={embedUrl}
-            title={reel.title}
-            loading="lazy"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            className="h-full w-full border-0"
-          />
+          {showEmbed ? (
+            <iframe
+              src={embedUrl}
+              title={reel.title}
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              className="h-full w-full border-0"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setShowEmbed(true)}
+              className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-[#7C3AED] via-[#F43F5E] to-[#F97316] px-6 text-center font-semibold text-white"
+              aria-label={`Load ${reel.title}`}
+            >
+              <Instagram className="h-12 w-12" />
+              <span>Load Instagram Reel</span>
+            </button>
+          )}
         </div>
 
         <div className="flex items-center justify-between gap-4 p-4">

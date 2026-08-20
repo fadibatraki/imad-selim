@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { TikTokVideo } from "@/data/tiktok-videos";
@@ -10,7 +11,10 @@ interface TikTokVideoCardProps {
   index?: number;
 }
 
-const TikTokVideoCard = ({ video, index = 0 }: TikTokVideoCardProps) => (
+const TikTokVideoCard = ({ video, index = 0 }: TikTokVideoCardProps) => {
+  const [showEmbed, setShowEmbed] = useState(false);
+
+  return (
   <motion.article
     initial={{ opacity: 0, y: 24 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -20,14 +24,25 @@ const TikTokVideoCard = ({ video, index = 0 }: TikTokVideoCardProps) => (
   >
     <div className="overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-b from-[#0B0B12]/90 to-[#0B0B12]/95 backdrop-blur-xl transition-all duration-300 hover:border-[#25F4EE]/50 hover:shadow-[0_0_32px_rgba(37,244,238,0.12)]">
       <div className="relative h-[610px] overflow-hidden bg-black sm:h-[660px]">
-        <iframe
-          src={`https://www.tiktok.com/player/v1/${video.videoId}?autoplay=0&loop=0`}
-          title={video.title}
-          loading="lazy"
-          allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-          className="h-full w-full border-0"
-        />
+        {showEmbed ? (
+          <iframe
+            src={`https://www.tiktok.com/player/v1/${video.videoId}?autoplay=0&loop=0`}
+            title={video.title}
+            allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            className="h-full w-full border-0"
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setShowEmbed(true)}
+            className="flex h-full w-full flex-col items-center justify-center gap-4 bg-black px-6 text-center font-semibold text-white"
+            aria-label={`Load ${video.title}`}
+          >
+            <TikTokIcon className="h-12 w-12" />
+            <span>Load TikTok video</span>
+          </button>
+        )}
       </div>
 
       <div className="flex items-center justify-between gap-4 p-4">
@@ -54,6 +69,7 @@ const TikTokVideoCard = ({ video, index = 0 }: TikTokVideoCardProps) => (
       </div>
     </div>
   </motion.article>
-);
+  );
+};
 
 export default TikTokVideoCard;

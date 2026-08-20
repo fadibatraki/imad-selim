@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
 import { Video } from "@/data/media";
@@ -9,6 +10,7 @@ interface VideoCardProps {
 }
 
 const VideoCard = ({ video, index = 0 }: VideoCardProps) => {
+  const [showPlayer, setShowPlayer] = useState(false);
   const formatDate = (dateISO: string) => {
     const date = new Date(dateISO);
     return date.toLocaleDateString("en-US", {
@@ -29,14 +31,24 @@ const VideoCard = ({ video, index = 0 }: VideoCardProps) => {
       <div className="overflow-hidden rounded-2xl border border-[#A855F7]/30 bg-gradient-to-b from-[#0B0B12]/90 to-[#0B0B12]/95 backdrop-blur-xl transition-all duration-300 hover:border-[#A855F7]/50">
         {/* Video Embed */}
         <div className="relative aspect-video overflow-hidden bg-black">
-          <iframe
-            src={video.youtubeUrl}
-            title={video.title}
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="h-full w-full"
-          />
+          {showPlayer ? (
+            <iframe
+              src={video.youtubeUrl}
+              title={video.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setShowPlayer(true)}
+              className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#17111f] to-black text-sm font-semibold text-white transition hover:from-[#261735]"
+              aria-label={`Load ${video.title}`}
+            >
+              <span className="rounded-full bg-red-600 px-6 py-3">▶ Play video</span>
+            </button>
+          )}
         </div>
 
         {/* Video Info */}
