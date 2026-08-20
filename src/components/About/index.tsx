@@ -18,10 +18,61 @@ import {
 } from "lucide-react";
 import { photos } from "@/data/media";
 import { stories } from "@/data/stories";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { siteFeatures } from "@/config/features";
 
+type BioLanguage = "ku" | "ar" | "en";
+
+const bioLanguages: Array<{
+  code: BioLanguage;
+  label: string;
+  nativeLabel: string;
+}> = [
+  { code: "ku", label: "Kurdish", nativeLabel: "Kurdî" },
+  { code: "ar", label: "Arabic", nativeLabel: "العربية" },
+  { code: "en", label: "English", nativeLabel: "English" },
+];
+
+const bioTranslations: Record<
+  BioLanguage,
+  { badge: string; title: string; paragraphs: string[] }
+> = {
+  ku: {
+    badge: "DERBARÊ IMAD SELIM DE",
+    title: "Dengê Mîrateyê",
+    paragraphs: [
+      "Ji çiyayên Tirkiyeyê bigire heta deştên Sûriyeyê, û dû re jî heta bajarên Almanyayê, rêwîtiya Emad dest pê kir—xewnek ku sînoran derbas dikir û hewesek bêdawî bi xwe re hildigirt.",
+      "Ew ne tenê hunermend û muzîkjenek bû, lê belê parêzvanê mîrateyeke dewlemend a muzîkê bû. Wî kevneşopiyên Kurdî nû kir û vejand, melodî vegerandin lêdanên wan ên resen, û ruh û nasnameya wan di nav demê de parast.",
+      "Di bîranîna wî de, bi hezaran stran û melodî dê wekî mîrateyeke zindî bên parastin, mîrateyek ku çîroka gelêkî tevahî vedibêje.",
+      "Ji bo wî, muzîk ne tenê huner bû, lê peyamek bû—da ku mîrat zindî bimîne û melodî, çiqas erd biguhere jî, şahidên kokên xwe bimînin.",
+    ],
+  },
+  ar: {
+    badge: "عن عماد سليم",
+    title: "صوتٌ من التراث",
+    paragraphs: [
+      "من جبال تركيا إلى سهول سوريا، ومنها إلى مدن ألمانيا، بدأت رحلة عماد؛ حلمٌ تجاوز الحدود، حاملاً معه شغفاً لا يعرف النهاية.",
+      "لم يكن مجرد فنان وموسيقي، بل كان أيضاً حارساً لإرث موسيقي غني. أعاد إحياء وتجديد التقاليد الكردية، وأرجع الألحان إلى إيقاعاتها الأصيلة، وحافظ على روحها وهويتها عبر الزمن.",
+      "وفي ذكراه، ستبقى آلاف الأغاني والألحان محفوظة كإرث حيّ، يروي حكاية شعب بأكمله.",
+      "بالنسبة إليه، لم تكن الموسيقى مجرد فن، بل كانت رسالة... كي يبقى التراث حياً، وكي تظل الألحان شاهدةً على جذورها، مهما تغيّرت الأرض.",
+    ],
+  },
+  en: {
+    badge: "ABOUT IMAD SELIM",
+    title: "A Voice of Heritage",
+    paragraphs: [
+      "From the mountains of Turkey to the plains of Syria, and then onward to the cities of Germany, Emad’s journey began—a dream that crossed borders, carrying with it a passion that knew no end.",
+      "He was not only an artist and musician, but also a guardian of a rich musical heritage. He renewed and revived Kurdish traditions, restoring melodies to their authentic rhythms and preserving their spirit and identity through time.",
+      "His memory lives on in thousands of songs and melodies, preserved as a living legacy that tells the story of an entire people.",
+      "For him, music was not merely an art, but a message—a way to keep heritage alive, and to ensure that melodies remain witnesses to their roots, no matter how much the land may change.",
+    ],
+  },
+};
+
 const About = () => {
+  const [bioLanguage, setBioLanguage] = useState<BioLanguage>("ku");
+  const activeBio = bioTranslations[bioLanguage];
+  const isArabic = bioLanguage === "ar";
   // Create looped arrays (triple the content for infinite scroll)
   const loopedPhotos = [
     ...photos.slice(0, 7),
@@ -467,6 +518,8 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
+              dir={isArabic ? "rtl" : "ltr"}
+              className={isArabic ? "text-right" : "text-left"}
             >
               {/* Badge */}
               <motion.div
@@ -477,8 +530,36 @@ const About = () => {
                 className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#F59E0B]/40 bg-[#F59E0B]/10 px-4 py-2 text-xs font-semibold text-[#F59E0B]"
               >
                 <Sparkles className="h-3 w-3" />
-                ABOUT IMAD SELIM
+                {activeBio.badge}
               </motion.div>
+
+              {/* Language switcher */}
+              <div
+                className="mx-auto mb-5 flex w-fit flex-wrap gap-1 rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-sm"
+                role="group"
+                aria-label="Biography language"
+              >
+                {bioLanguages.map((language) => {
+                  const isActive = bioLanguage === language.code;
+
+                  return (
+                    <button
+                      key={language.code}
+                      type="button"
+                      onClick={() => setBioLanguage(language.code)}
+                      aria-label={`Read biography in ${language.label}`}
+                      aria-pressed={isActive}
+                      className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[#A855F7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07070B] focus-visible:outline-none ${
+                        isActive
+                          ? "bg-gradient-to-r from-[#7C3AED] to-[#A855F7] text-white shadow-lg shadow-[#7C3AED]/20"
+                          : "text-white/60 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      {language.nativeLabel}
+                    </button>
+                  );
+                })}
+              </div>
 
               {/* Title */}
               <motion.h2
@@ -489,7 +570,7 @@ const About = () => {
                 className="mb-6 text-4xl leading-tight font-extrabold sm:text-5xl lg:text-6xl"
               >
                 <span className="bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#F43F5E] bg-clip-text text-transparent">
-                  A Voice of Heritage
+                  {activeBio.title}
                 </span>
               </motion.h2>
 
@@ -499,25 +580,15 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="mb-8 space-y-4 text-base leading-relaxed text-white/70 sm:text-lg"
+                key={bioLanguage}
+                lang={bioLanguage}
+                className={`mb-8 space-y-4 text-base leading-relaxed text-white/70 sm:text-lg ${
+                  isArabic ? "text-right" : "text-left"
+                }`}
               >
-                <p>
-                 Ji çiyayên Tirkiyeyê bigire heta  deştên sûriyeyê,û dû re jî heta şaristaniya Almanya...rêwîtiya Emad dest pê kir,xewnek ku sînoran derbas dikir 
-                 û hewesek ku bêdawî nedizanî bi xwe re hildigirt. {" "}
-                </p>
-                <p>
-                  Ew ne tenê  hunermed û muzîkjenek bû,lê belê parêzvanê mîrateyek 
-                 dewlemnd a  muzîkê bû,kevneşopiyên kurdî nû dikir û vejand, lêdana wan a resen vedigerand melodiyan,û ruh û nasnameya 
-                 wan di demê re,diparast.{" "}
-                </p>
-                <p>
-                 Di bîranîna wî dê  bi hezaran stran û melodî hene ku wekî mîrateyek zindî têne parastin ku 
-                 çîrokên tevahiya gelekî vedibêje.{" "}
-                </p>
-                <p>
-                 Ji bo wî ,muzîk ne tenê hunerek bû, lê peyamek bû...ji,bo ku mîrat zindî bimîne, 
-                 û ji bo ku melodî şahidên kokan bimînin çi qas erd biguhere ji.{" "}
-                </p>
+                {activeBio.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </motion.div>
             </motion.div>
           </div>

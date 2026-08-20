@@ -327,12 +327,12 @@ export default function Hero() {
           transition={{ delay: 0.35, duration: 0.7 }}
           className="mt-9 flex flex-col gap-4 sm:flex-row"
         >
-          <Link href="/music">
+          {/* <Link href="/music">
             <GlowButton primary>
               <Play className="mr-2 h-5 w-5" />
               Listen Now
             </GlowButton>
-          </Link>
+          </Link> */}
 
           <a
             href="https://www.youtube.com/@imad_selim"

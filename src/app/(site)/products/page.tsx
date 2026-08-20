@@ -7,11 +7,41 @@ import { products } from "@/data/products";
 export default function ProductsPage() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#07070B]">
+      {/* Coming soon cover */}
+      <div className="fixed inset-x-0 top-[72px] bottom-0 z-40 flex items-center justify-center overflow-hidden bg-[#07070B]/90 px-4 backdrop-blur-xl md:top-[80px]">
+        <motion.div
+          className="absolute h-80 w-80 rounded-full bg-[#7C3AED]/25 blur-[110px] sm:h-[28rem] sm:w-[28rem]"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.55, 0.85, 0.55] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center"
+        >
+          <motion.div
+            className="mb-6 flex justify-center"
+            animate={{ y: [0, -8, 0], rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Sparkles className="h-12 w-12 text-[#A855F7]" />
+          </motion.div>
+          <p className="mb-3 text-sm font-semibold tracking-[0.35em] text-[#F59E0B] uppercase">
+            Perfumes Collection
+          </p>
+          <h1 className="bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#F43F5E] bg-clip-text text-5xl leading-tight font-extrabold text-transparent sm:text-7xl lg:text-8xl">
+            Coming Soon
+          </h1>
+          <div className="mx-auto mt-8 h-1 w-24 rounded-full bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#F43F5E]" />
+        </motion.div>
+      </div>
+
       {/* Animated background */}
       <div className="fixed inset-0 z-0">
         {/* Purple glow */}
         <motion.div
-          className="absolute left-1/4 top-20 h-96 w-96 rounded-full bg-[#7C3AED]/25 blur-[100px]"
+          className="absolute top-20 left-1/4 h-96 w-96 rounded-full bg-[#7C3AED]/25 blur-[100px]"
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -22,13 +52,18 @@ export default function ProductsPage() {
 
         {/* Gold glow */}
         <motion.div
-          className="absolute right-1/4 top-40 h-96 w-96 rounded-full bg-[#F59E0B]/18 blur-[100px]"
+          className="absolute top-40 right-1/4 h-96 w-96 rounded-full bg-[#F59E0B]/18 blur-[100px]"
           animate={{
             x: [0, -50, 0],
             y: [0, -30, 0],
             scale: [1, 1.2, 1],
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
         />
 
         {/* Purple glow bottom */}
@@ -38,7 +73,12 @@ export default function ProductsPage() {
             x: [0, 30, 0],
             scale: [1, 1.15, 1],
           }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
         />
 
         {/* Grid pattern overlay */}
@@ -47,7 +87,7 @@ export default function ProductsPage() {
           style={{
             backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
+            backgroundSize: "50px 50px",
           }}
         />
       </div>
@@ -91,7 +131,7 @@ export default function ProductsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="mb-6 text-5xl font-extrabold leading-tight md:text-6xl lg:text-7xl"
+                className="mb-6 text-5xl leading-tight font-extrabold md:text-6xl lg:text-7xl"
               >
                 <span className="bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#F43F5E] bg-clip-text text-transparent">
                   Perfumes
@@ -105,8 +145,9 @@ export default function ProductsPage() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="mx-auto max-w-2xl text-lg text-white/70 md:text-xl"
               >
-                Experience the essence of Kurdish heritage through our signature collection.
-                Each fragrance tells a story, capturing the soul of ancient traditions and timeless melodies.
+                Experience the essence of Kurdish heritage through our signature
+                collection. Each fragrance tells a story, capturing the soul of
+                ancient traditions and timeless melodies.
               </motion.p>
 
               {/* Decorative line */}
@@ -136,7 +177,9 @@ export default function ProductsPage() {
                 animate={{ opacity: 1 }}
                 className="py-20 text-center"
               >
-                <p className="text-xl text-white/50">No products available yet.</p>
+                <p className="text-xl text-white/50">
+                  No products available yet.
+                </p>
               </motion.div>
             )}
           </div>
