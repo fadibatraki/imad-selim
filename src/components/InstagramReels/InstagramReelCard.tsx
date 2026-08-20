@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ExternalLink, Instagram } from "lucide-react";
 import { InstagramReel } from "@/data/instagram-reels";
@@ -13,6 +14,7 @@ interface InstagramReelCardProps {
 const InstagramReelCard = ({ reel, index = 0 }: InstagramReelCardProps) => {
   const [showEmbed, setShowEmbed] = useState(false);
   const embedUrl = `${reel.url.replace(/\/$/, "")}/embed/captioned/`;
+  const previewImage = `/images/profile/${(index % 3) + 1}.jpeg`;
 
   return (
     <motion.article
@@ -35,11 +37,21 @@ const InstagramReelCard = ({ reel, index = 0 }: InstagramReelCardProps) => {
             <button
               type="button"
               onClick={() => setShowEmbed(true)}
-              className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-[#7C3AED] via-[#F43F5E] to-[#F97316] px-6 text-center font-semibold text-white"
+              className="group/player relative flex h-full w-full flex-col items-center justify-center gap-4 overflow-hidden bg-black px-6 text-center font-semibold text-white"
               aria-label={`Load ${reel.title}`}
             >
-              <Instagram className="h-12 w-12" />
-              <span>Load Instagram Reel</span>
+              <Image
+                src={previewImage}
+                alt={`${reel.title} preview`}
+                fill
+                sizes="(max-width: 768px) 100vw, 390px"
+                className="object-cover transition duration-300 group-hover/player:scale-105"
+              />
+              <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/20" />
+              <span className="relative flex flex-col items-center gap-3 rounded-2xl bg-black/45 px-5 py-4 backdrop-blur-sm">
+                <Instagram className="h-10 w-10" />
+                <span>▶ Play Instagram Reel</span>
+              </span>
             </button>
           )}
         </div>

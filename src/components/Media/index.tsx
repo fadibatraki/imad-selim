@@ -9,6 +9,7 @@ const Media = () => {
   const [showFeaturedVideo, setShowFeaturedVideo] = useState(false);
   const featuredPhotos = photos.slice(0, 4);
   const featuredVideo = videos[0];
+  const featuredVideoId = featuredVideo.youtubeUrl.match(/(?:embed\/|youtu\.be\/|v=)([^?&/]+)/)?.[1];
 
   return (
     <section className="relative overflow-hidden bg-[#07070B] py-20 md:py-[120px]">
@@ -152,10 +153,18 @@ const Media = () => {
                   <button
                     type="button"
                     onClick={() => setShowFeaturedVideo(true)}
-                    className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#17111f] to-black text-sm font-semibold text-white transition hover:from-[#261735]"
+                    className="group/player relative flex h-full w-full items-center justify-center overflow-hidden bg-black text-sm font-semibold text-white"
                     aria-label={`Load ${featuredVideo.title}`}
                   >
-                    <span className="rounded-full bg-red-600 px-6 py-3">▶ Play video</span>
+                    {featuredVideoId && (
+                      <img
+                        src={`https://i.ytimg.com/vi/${featuredVideoId}/hqdefault.jpg`}
+                        alt=""
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover/player:scale-105"
+                      />
+                    )}
+                    <span className="relative rounded-full bg-red-600/95 px-6 py-3 shadow-lg">▶ Play video</span>
                   </button>
                 )}
               </div>

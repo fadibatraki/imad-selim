@@ -11,6 +11,7 @@ interface VideoCardProps {
 
 const VideoCard = ({ video, index = 0 }: VideoCardProps) => {
   const [showPlayer, setShowPlayer] = useState(false);
+  const videoId = video.youtubeUrl.match(/(?:embed\/|youtu\.be\/|v=)([^?&/]+)/)?.[1];
   const formatDate = (dateISO: string) => {
     const date = new Date(dateISO);
     return date.toLocaleDateString("en-US", {
@@ -43,10 +44,18 @@ const VideoCard = ({ video, index = 0 }: VideoCardProps) => {
             <button
               type="button"
               onClick={() => setShowPlayer(true)}
-              className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#17111f] to-black text-sm font-semibold text-white transition hover:from-[#261735]"
+              className="group/player relative flex h-full w-full items-center justify-center overflow-hidden bg-black text-sm font-semibold text-white"
               aria-label={`Load ${video.title}`}
             >
-              <span className="rounded-full bg-red-600 px-6 py-3">▶ Play video</span>
+              {videoId && (
+                <img
+                  src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+                  alt=""
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover/player:scale-105"
+                />
+              )}
+              <span className="relative rounded-full bg-red-600/95 px-6 py-3 shadow-lg">▶ Play video</span>
             </button>
           )}
         </div>

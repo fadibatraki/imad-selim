@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { TikTokVideo } from "@/data/tiktok-videos";
@@ -13,6 +14,7 @@ interface TikTokVideoCardProps {
 
 const TikTokVideoCard = ({ video, index = 0 }: TikTokVideoCardProps) => {
   const [showEmbed, setShowEmbed] = useState(false);
+  const previewImage = `/images/profile/${(index % 3) + 4}.jpeg`;
 
   return (
   <motion.article
@@ -36,11 +38,21 @@ const TikTokVideoCard = ({ video, index = 0 }: TikTokVideoCardProps) => {
           <button
             type="button"
             onClick={() => setShowEmbed(true)}
-            className="flex h-full w-full flex-col items-center justify-center gap-4 bg-black px-6 text-center font-semibold text-white"
+            className="group/player relative flex h-full w-full flex-col items-center justify-center gap-4 overflow-hidden bg-black px-6 text-center font-semibold text-white"
             aria-label={`Load ${video.title}`}
           >
-            <TikTokIcon className="h-12 w-12" />
-            <span>Load TikTok video</span>
+            <Image
+              src={previewImage}
+              alt={`${video.title} preview`}
+              fill
+              sizes="(max-width: 768px) 100vw, 390px"
+              className="object-cover transition duration-300 group-hover/player:scale-105"
+            />
+            <span className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/25" />
+            <span className="relative flex flex-col items-center gap-3 rounded-2xl bg-black/50 px-5 py-4 backdrop-blur-sm">
+              <TikTokIcon className="h-10 w-10" />
+              <span>▶ Play TikTok video</span>
+            </span>
           </button>
         )}
       </div>

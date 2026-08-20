@@ -55,9 +55,8 @@ export default function Hero() {
   // small screens the visual is subtle enough that skipping it saves a large
   // download and considerably reduces decoding work.
   useEffect(() => {
-    const media = window.matchMedia("(min-width: 768px)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (!media.matches || reducedMotion.matches) return;
+    if (reducedMotion.matches) return;
 
     let idleId: number | undefined;
     let timerId: ReturnType<typeof setTimeout> | undefined;
