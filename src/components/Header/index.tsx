@@ -21,15 +21,14 @@ const Header = () => {
 
   // Sticky Navbar
   const [sticky, setSticky] = useState(false);
-  const handleStickyNavbar = () => {
-    if (window.scrollY >= 80) {
-      setSticky(true);
-    } else {
-      setSticky(false);
-    }
-  };
   useEffect(() => {
-    window.addEventListener("scroll", handleStickyNavbar);
+    const handleStickyNavbar = () => {
+      const shouldBeSticky = window.scrollY >= 80;
+      setSticky((current) => current === shouldBeSticky ? current : shouldBeSticky);
+    };
+
+    handleStickyNavbar();
+    window.addEventListener("scroll", handleStickyNavbar, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleStickyNavbar);
@@ -54,38 +53,11 @@ const Header = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
-        className={`ud-header left-0 top-0 z-40 flex w-full items-center transition-all duration-300 ${sticky
-          ? "shadow-[0_0_30px_rgba(124,58,237,0.35)] fixed z-[999] border-b border-[#7C3AED]/30 bg-[#07070B]/95 backdrop-blur-xl"
+        className={`ud-header left-0 top-0 z-40 flex w-full items-center transition-[background-color,box-shadow] duration-300 ${sticky
+          ? "fixed z-[999] bg-[#07070B]/98 shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
           : "absolute bg-transparent"
           }`}
       >
-        {/* Animated background glow when sticky */}
-        {sticky && (
-          <>
-            <motion.div
-              className="absolute inset-0 opacity-30"
-              animate={{
-                background: [
-                  "radial-gradient(600px 100px at 30% 50%, rgba(124,58,237,0.15), transparent 70%)",
-                  "radial-gradient(600px 100px at 70% 50%, rgba(124,58,237,0.15), transparent 70%)",
-                  "radial-gradient(600px 100px at 30% 50%, rgba(124,58,237,0.15), transparent 70%)",
-                ],
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.div
-              className="absolute inset-0 opacity-20"
-              animate={{
-                background: [
-                  "radial-gradient(500px 80px at 70% 50%, rgba(34,211,238,0.12), transparent 70%)",
-                  "radial-gradient(500px 80px at 30% 50%, rgba(34,211,238,0.12), transparent 70%)",
-                  "radial-gradient(500px 80px at 70% 50%, rgba(34,211,238,0.12), transparent 70%)",
-                ],
-              }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            />
-          </>
-        )}
         <div className="container relative z-10">
           <div className="relative -mx-4 flex items-center justify-between">
             <div className="w-60 max-w-full px-4">
@@ -95,7 +67,7 @@ const Header = () => {
                   } `}
               >
                 <motion.span
-                  className="relative inline-block"
+                  className="relative inline-block whitespace-nowrap"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -103,28 +75,19 @@ const Header = () => {
                     IMAD SELIM
                   </span>
 
-                  <motion.span
+                  <span
                     className={[
                       "relative font-extrabold tracking-tight",
                       "bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#F43F5E] bg-clip-text text-transparent",
                       sticky || pathUrl !== "/" ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl",
                     ].join(" ")}
-                    animate={{
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                    }}
-                    transition={{ duration: 5, repeat: Infinity }}
-                    style={{ backgroundSize: "200% 200%" }}
                   >
                     IMAD SELIM
-                  </motion.span>
+                  </span>
 
                   {/* Glow effect */}
-                  <motion.span
+                  <span
                     className="absolute inset-0 blur-lg bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#F43F5E] bg-clip-text text-transparent opacity-40"
-                    animate={{
-                      opacity: [0.2, 0.4, 0.2],
-                    }}
-                    transition={{ duration: 2, repeat: Infinity }}
                   >
                     <span className={[
                       "font-extrabold tracking-tight",
@@ -132,7 +95,7 @@ const Header = () => {
                     ].join(" ")}>
                       IMAD SELIM
                     </span>
-                  </motion.span>
+                  </span>
                 </motion.span>
               </Link>
             </div>
@@ -174,7 +137,6 @@ const Header = () => {
                           >
                             <Link
                               onClick={navbarToggleHandler}
-                              scroll={false}
                               href={menuItem.path}
                               className={`ud-menu-scroll relative flex py-2 text-base text-white transition-all lg:inline-flex lg:px-0 lg:py-6 ${pathUrl === menuItem?.path
                                 ? "text-[#7C3AED]"

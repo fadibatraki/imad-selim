@@ -83,23 +83,7 @@ const VideoCard = ({ video, index = 0 }: VideoCardProps) => {
           </a>
         </div>
 
-        {/* Border glow effect */}
-        <motion.div
-          className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, rgba(124,58,237,0.4), transparent)",
-            backgroundSize: "200% 100%",
-          }}
-          animate={{
-            backgroundPosition: ["0% 0%", "200% 0%"],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
+        <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 ring-1 ring-inset ring-[#7C3AED]/50 transition-opacity duration-300 group-hover:opacity-100" />
       </div>
     </motion.div>
   );

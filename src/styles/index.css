@@ -474,6 +474,12 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Skip layout and paint work for homepage sections until they approach the viewport. */
+.home-page > section:not(#home) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
 /* Responsive video container */
 .video-container {
   position: relative;

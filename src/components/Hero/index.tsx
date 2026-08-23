@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Play, Youtube } from "lucide-react";
+import { Youtube } from "lucide-react";
 
 /* ----------------------- Deterministic helpers (no Math.random in render) ----------------------- */
 function seededRandom(seed: number) {
@@ -49,37 +47,31 @@ type Bokeh = {
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [canLoadBackgroundVideo, setCanLoadBackgroundVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHeroActive, setIsHeroActive] = useState(true);
 
-  // The hero video is large, so keep it out of the critical loading path. On
-  // small screens the visual is subtle enough that skipping it saves a large
-  // download and considerably reduces decoding work.
+  // Stop the video and the decorative animation loops as soon as the hero is
+  // outside the viewport. This keeps the rest of the page smooth while scrolling.
   useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reducedMotion.matches) return;
+    const hero = containerRef.current;
+    if (!hero) return;
 
-    let idleId: number | undefined;
-    let timerId: ReturnType<typeof setTimeout> | undefined;
-    const scheduleVideo = () => {
-      if ("requestIdleCallback" in window) {
-        idleId = window.requestIdleCallback(
-          () => setCanLoadBackgroundVideo(true),
-          { timeout: 2500 },
-        );
-      } else {
-        timerId = setTimeout(() => setCanLoadBackgroundVideo(true), 1500);
-      }
-    };
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsHeroActive(entry.isIntersecting),
+      { rootMargin: "100px 0px" },
+    );
+    observer.observe(hero);
 
-    if (document.readyState === "complete") scheduleVideo();
-    else window.addEventListener("load", scheduleVideo, { once: true });
-
-    return () => {
-      window.removeEventListener("load", scheduleVideo);
-      if (idleId !== undefined) window.cancelIdleCallback(idleId);
-      if (timerId !== undefined) clearTimeout(timerId);
-    };
+    return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isHeroActive) void video.play().catch(() => undefined);
+    else video.pause();
+  }, [isHeroActive]);
 
   // Parallax
   const mouseX = useMotionValue(0);
@@ -169,7 +161,7 @@ export default function Hero() {
       id="home"
       ref={containerRef}
       onMouseMove={onMouseMove}
-      className="relative h-screen w-full overflow-hidden bg-[#07070B] text-white"
+      className="relative h-[100svh] min-h-[36rem] w-full overflow-hidden bg-[#07070B] text-white"
 
     >
       {/* ===================== STAGE BACKGROUND (BIG DIFFERENCE) ===================== */}
@@ -181,22 +173,21 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(1000px_600px_at_50%_28%,rgba(124,58,237,0.35),transparent_65%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(900px_560px_at_62%_45%,rgba(168,85,247,0.25),transparent_70%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(820px_520px_at_40%_58%,rgba(244,63,94,0.22),transparent_74%)]" />
-        <StageLasers />
+        {isHeroActive && <StageLasers />}
         {/* LED wall tiles (fills the whole background including edges) */}
         {/* Background live performance video */}
-        {canLoadBackgroundVideo && (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            poster="/images/hero/hero-image.jpg"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.22] pointer-events-none"
-          >
-            <source src="/images/hero/imadselim.webm" type="video/webm" />
-          </video>
-        )}
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.22] motion-reduce:hidden"
+        >
+          <source src="/images/hero/imadselim.webm" type="video/webm" />
+        </video>
 
         {/* optional: fade so text stays clear */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
@@ -204,7 +195,7 @@ export default function Hero() {
 
 
         {/* Big bokeh lights like a real concert */}
-        <div className="absolute inset-0">
+        {isHeroActive && <div className="absolute inset-0">
           {bokeh.map((b, i) => {
             const c =
               b.hue === "purple"
@@ -240,12 +231,12 @@ export default function Hero() {
               />
             );
           })}
-        </div>
+        </div>}
 
 
 
         {/* Haze / smoke (stronger) */}
-        <motion.div
+        {isHeroActive && <motion.div
           className="absolute inset-0"
           animate={{ opacity: [0.35, 0.62, 0.35] }}
           transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut" }}
@@ -254,7 +245,7 @@ export default function Hero() {
           <div className="absolute inset-0 bg-[radial-gradient(1000px_620px_at_50%_82%,rgba(255,255,255,0.10),transparent_70%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(680px_520px_at_28%_72%,rgba(255,255,255,0.08),transparent_72%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(720px_540px_at_72%_74%,rgba(255,255,255,0.07),transparent_74%)]" />
-        </motion.div>
+        </motion.div>}
 
         {/* Grain */}
         <div className="absolute inset-0 opacity-[0.10] mix-blend-overlay">
@@ -272,15 +263,19 @@ export default function Hero() {
 
       {/* ===================== Music elements ===================== */}
       <div className="absolute inset-0 z-[2]">
-        <RhythmLinesStrong />
-        <FloatingNotes notes={floatingNotes} />
+        {isHeroActive && (
+          <>
+            <RhythmLinesStrong />
+            <FloatingNotes notes={floatingNotes} />
+          </>
+        )}
       </div>
 
       {/* Bottom equalizer */}
       <div className="absolute bottom-0 left-0 right-0 z-[3] h-40 opacity-55">
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-end gap-[3px]">
-          {eqBars.map((b, i) => (
+          {isHeroActive && eqBars.map((b, i) => (
             <motion.div
               key={i}
               className="w-[3px] rounded-t-full bg-[#7C3AED]"
@@ -300,7 +295,7 @@ export default function Hero() {
       </div>
 
       {/* ===================== Content ===================== */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-4 sm:px-5 md:px-6 py-12 sm:py-16">
+      <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col items-center justify-center px-4 py-12 sm:px-5 sm:py-16 md:px-6">
         {/* Artist image: make it feel alive + no rectangle */}
 
         {/* Strong rim glow */}
@@ -313,18 +308,6 @@ export default function Hero() {
         <div className="pointer-events-none absolute -inset-20 -z-10 blur-[85px]">
           <div className="h-full w-full bg-[radial-gradient(closest-side,rgba(168,85,247,0.28),transparent_76%)]" />
         </div>
-
-        {/* <div className="relative h-[290px] w-[230px] sm:h-[340px] sm:w-[290px] md:h-[410px] md:w-[360px] lg:h-[470px] lg:w-[420px]">
-           <Image
-            src="/images/hero/imadselim1.png"
-            alt="Imad Selim performing"
-            fill
-            priority
-            className="object-cover object-top"
-
-          /> 
-        </div> */}
-
 
         {/* Text */}
         <motion.div
@@ -343,7 +326,7 @@ export default function Hero() {
             </span>
           </h1>
 
-          <Waveform />
+          <Waveform active={isHeroActive} />
 
           <p className="mt-3 text-xs font-medium tracking-[0.20em] sm:tracking-[0.28em] md:tracking-[0.32em] text-white/70 sm:text-sm md:text-base">
             Singer • Poet • Traditional Storyteller
@@ -361,13 +344,6 @@ export default function Hero() {
           transition={{ delay: 0.35, duration: 0.7 }}
           className="mt-9 flex flex-col gap-4 sm:flex-row"
         >
-          {/* <Link href="/music">
-            <GlowButton primary>
-              <Play className="mr-2 h-5 w-5" />
-              Listen Now
-            </GlowButton>
-          </Link> */}
-
           <a
             href="https://www.youtube.com/@imad_selim"
             target="_blank"
@@ -487,7 +463,7 @@ function FloatingNotes({ notes }: { notes: FloatNote[] }) {
   );
 }
 
-function Waveform() {
+function Waveform({ active }: { active: boolean }) {
   const bars = useMemo(() => {
     return Array.from({ length: 16 }, (_, i) => {
       const r1 = seededRandom(i * 9 + 1);
@@ -502,8 +478,12 @@ function Waveform() {
         <motion.div
           key={i}
           className="w-[3px] rounded-full bg-[#7C3AED]"
-          animate={{ height: [b.base, b.base + b.amp, b.base], opacity: [0.55, 1, 0.55] }}
-          transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut", delay: b.d }}
+          animate={active
+            ? { height: [b.base, b.base + b.amp, b.base], opacity: [0.55, 1, 0.55] }
+            : { height: b.base, opacity: 0.55 }}
+          transition={active
+            ? { duration: 1.05, repeat: Infinity, ease: "easeInOut", delay: b.d }
+            : { duration: 0.2 }}
         />
       ))}
     </div>

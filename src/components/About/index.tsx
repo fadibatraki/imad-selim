@@ -13,12 +13,9 @@ import {
   Award,
   ChevronLeft,
   ChevronRight,
-  ChevronUp,
-  ChevronDown,
 } from "lucide-react";
 import { photos } from "@/data/media";
-import { stories } from "@/data/stories";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { siteFeatures } from "@/config/features";
 
 type BioLanguage = "ku" | "ar" | "en";
@@ -73,82 +70,10 @@ const About = () => {
   const [bioLanguage, setBioLanguage] = useState<BioLanguage>("ku");
   const activeBio = bioTranslations[bioLanguage];
   const isArabic = bioLanguage === "ar";
-  // Create looped arrays (triple the content for infinite scroll)
-  const loopedPhotos = [
-    ...photos.slice(0, 7),
-    ...photos.slice(0, 7),
-    ...photos.slice(0, 7),
-  ];
-  const featuredStories = stories.slice(0, 5);
-  const loopedStories = [
-    ...featuredStories,
-    ...featuredStories,
-    ...featuredStories,
-  ];
+  const featuredPhotos = photos.slice(0, 7);
 
   // Refs for scroll containers
   const imageScrollRef = useRef<HTMLDivElement>(null);
-  const storiesScrollRef = useRef<HTMLDivElement>(null);
-  const isScrollingImages = useRef(false);
-  const isScrollingStories = useRef(false);
-
-  // Set initial scroll position to middle section
-  useEffect(() => {
-    if (imageScrollRef.current) {
-      const scrollWidth = imageScrollRef.current.scrollWidth;
-      imageScrollRef.current.scrollLeft = scrollWidth / 3;
-    }
-    if (storiesScrollRef.current) {
-      const scrollHeight = storiesScrollRef.current.scrollHeight;
-      storiesScrollRef.current.scrollTop = scrollHeight / 3;
-    }
-  }, []);
-
-  // Infinite scroll handler for images
-  const handleImageScroll = () => {
-    if (!imageScrollRef.current || isScrollingImages.current) return;
-
-    const { scrollLeft, scrollWidth, clientWidth } = imageScrollRef.current;
-    const sectionWidth = scrollWidth / 3;
-
-    if (scrollLeft <= 50) {
-      isScrollingImages.current = true;
-      imageScrollRef.current.scrollLeft = sectionWidth + scrollLeft;
-      setTimeout(() => {
-        isScrollingImages.current = false;
-      }, 50);
-    } else if (scrollLeft >= sectionWidth * 2 - clientWidth - 50) {
-      isScrollingImages.current = true;
-      imageScrollRef.current.scrollLeft =
-        sectionWidth + (scrollLeft - sectionWidth * 2);
-      setTimeout(() => {
-        isScrollingImages.current = false;
-      }, 50);
-    }
-  };
-
-  // Infinite scroll handler for stories
-  const handleStoriesScroll = () => {
-    if (!storiesScrollRef.current || isScrollingStories.current) return;
-
-    const { scrollTop, scrollHeight, clientHeight } = storiesScrollRef.current;
-    const sectionHeight = scrollHeight / 3;
-
-    if (scrollTop <= 50) {
-      isScrollingStories.current = true;
-      storiesScrollRef.current.scrollTop = sectionHeight + scrollTop;
-      setTimeout(() => {
-        isScrollingStories.current = false;
-      }, 50);
-    } else if (scrollTop >= sectionHeight * 2 - clientHeight - 50) {
-      isScrollingStories.current = true;
-      storiesScrollRef.current.scrollTop =
-        sectionHeight + (scrollTop - sectionHeight * 2);
-      setTimeout(() => {
-        isScrollingStories.current = false;
-      }, 50);
-    }
-  };
 
   // Scroll functions for horizontal image slider
   const scrollImages = (direction: "left" | "right") => {
@@ -156,17 +81,6 @@ const About = () => {
       const scrollAmount = imageScrollRef.current.clientWidth;
       imageScrollRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  // Scroll functions for vertical stories slider
-  const scrollStories = (direction: "up" | "down") => {
-    if (storiesScrollRef.current) {
-      const scrollAmount = 150;
-      storiesScrollRef.current.scrollBy({
-        top: direction === "up" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });
     }
@@ -188,34 +102,8 @@ const About = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-[#07070B] via-[#0B0B12] to-[#07070B]" />
 
-        {/* Animated stage glow */}
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              "radial-gradient(900px 500px at 50% 50%, rgba(124,58,237,0.15), transparent 70%)",
-              "radial-gradient(900px 500px at 50% 50%, rgba(124,58,237,0.25), transparent 70%)",
-              "radial-gradient(900px 500px at 50% 50%, rgba(124,58,237,0.15), transparent 70%)",
-            ],
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              "radial-gradient(750px 420px at 70% 50%, rgba(244,63,94,0.10), transparent 70%)",
-              "radial-gradient(750px 420px at 70% 50%, rgba(244,63,94,0.18), transparent 70%)",
-              "radial-gradient(750px 420px at 70% 50%, rgba(244,63,94,0.10), transparent 70%)",
-            ],
-          }}
-          transition={{
-            duration: 4.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_50%_50%,rgba(124,58,237,0.18),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(750px_420px_at_70%_50%,rgba(244,63,94,0.12),transparent_70%)]" />
       </div>
 
       {/* Content */}
@@ -262,7 +150,6 @@ const About = () => {
                 <div
                   ref={imageScrollRef}
                   className="scrollbar-hide snap-x snap-mandatory overflow-x-auto"
-                  onScroll={handleImageScroll}
                   style={
                     {
                       scrollbarWidth: "none",
@@ -272,7 +159,7 @@ const About = () => {
                   }
                 >
                   <div className="flex">
-                    {loopedPhotos.map((photo, i) => (
+                    {featuredPhotos.map((photo, i) => (
                       <Link
                         key={`photo-${i}`}
                         href="/media"
@@ -303,18 +190,7 @@ const About = () => {
                             </p>
                           </div>
 
-                          {/* Glow border on hover */}
-                          <motion.div
-                            className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                            animate={{
-                              boxShadow: [
-                                "inset 0 0 20px rgba(124,58,237,0.3), 0 0 20px rgba(124,58,237,0.2)",
-                                "inset 0 0 30px rgba(244,63,94,0.4), 0 0 30px rgba(244,63,94,0.3)",
-                                "inset 0 0 20px rgba(124,58,237,0.3), 0 0 20px rgba(124,58,237,0.2)",
-                              ],
-                            }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                          />
+                          <div className="pointer-events-none absolute inset-0 rounded-lg opacity-0 shadow-[inset_0_0_24px_rgba(124,58,237,0.35)] transition-opacity duration-300 group-hover:opacity-100" />
                         </motion.div>
                       </Link>
                     ))}

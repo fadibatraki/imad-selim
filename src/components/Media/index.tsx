@@ -13,25 +13,10 @@ const Media = () => {
 
   return (
     <section className="relative overflow-hidden bg-[#07070B] py-20 md:py-[120px]">
-      {/* Animated background */}
+      {/* Lightweight background */}
       <div className="absolute inset-0 z-0">
-        <motion.div
-          className="absolute left-1/4 top-20 h-96 w-96 rounded-full bg-[#7C3AED]/20 blur-[120px]"
-          animate={{
-            x: [0, 30, 0],
-            scale: [1, 1.15, 1],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        <motion.div
-          className="absolute right-1/4 top-40 h-96 w-96 rounded-full bg-[#F43F5E]/15 blur-[120px]"
-          animate={{
-            x: [0, -30, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
+        <div className="absolute left-1/4 top-20 h-96 w-96 rounded-full bg-[#7C3AED]/15 blur-[100px]" />
+        <div className="absolute right-1/4 top-40 h-96 w-96 rounded-full bg-[#F43F5E]/10 blur-[100px]" />
       </div>
 
       {/* Content */}
@@ -44,15 +29,9 @@ const Media = () => {
           transition={{ duration: 0.6 }}
           className="mx-auto mb-12 max-w-3xl text-center md:mb-16"
         >
-          <motion.div
-            className="mb-4 flex justify-center"
-            animate={{
-              rotate: [0, 5, -5, 0],
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          >
+          <div className="mb-4 flex justify-center">
             <ImageIcon className="h-12 w-12 text-[#7C3AED]" />
-          </motion.div>
+          </div>
 
           <h2 className="mb-4 text-3xl font-extrabold text-white md:text-4xl lg:text-5xl">
             <span className="bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#F43F5E] bg-clip-text text-transparent">
@@ -102,23 +81,7 @@ const Media = () => {
                     </div>
                   </div>
 
-                  {/* Border glow animation */}
-                  <motion.div
-                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, transparent, rgba(124,58,237,0.5), transparent)",
-                      backgroundSize: "200% 100%",
-                    }}
-                    animate={{
-                      backgroundPosition: ["0% 0%", "200% 0%"],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  />
+                  <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 ring-1 ring-inset ring-[#7C3AED]/50 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
               </motion.div>
             ))}
@@ -195,23 +158,7 @@ const Media = () => {
                 </div>
               </div>
 
-              {/* Border glow effect */}
-              <motion.div
-                className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent, rgba(124,58,237,0.5), transparent)",
-                  backgroundSize: "200% 100%",
-                }}
-                animate={{
-                  backgroundPosition: ["0% 0%", "200% 0%"],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 ring-1 ring-inset ring-[#7C3AED]/50 transition-opacity duration-300 group-hover:opacity-100" />
             </div>
           </motion.div>
         </div>
